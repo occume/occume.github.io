@@ -386,7 +386,7 @@ $(document).ready(function(){
 		var attrPointer = {cursor: "pointer"};
 
 		var paper = Raphael("jone_music", 62, 62),
-			mBgr = paper.image(imgBaseURL + 'shareid=1717179959&uk=704776812.png', 0, 0, 60, 60);
+			mBgr = paper.image('http://occume.github.io/cnblogs/images/bgr1.png', 0, 0, 60, 60);
 		var baseProgress = paper.path("m30.5,3 a27,27 0 1,1 -1,0 z").attr({
 				stroke: "#999",
 				"stroke-width": 8,

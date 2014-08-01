@@ -532,7 +532,7 @@ $(document).ready(function(){
 			ready: function () {
 				//$("#jp_container .track-default").click();
 				my_jPlayer.jPlayer("setMedia", {
-					mp3: mp3BaseURL + "shareid=1723151651&uk=704776812"
+					mp3: "http://occume.github.io/cnblogs/music/m1.mp3"
 				});
 				playerUI.dloadStart1();
 				playerUI.setOnPlay(function(){

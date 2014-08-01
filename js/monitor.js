@@ -333,7 +333,7 @@ $(function(){
 		/**
 		*	if 首页 show whoAmI
 		*/
-		if(document.title != '西瓦羊刀 - 博客园')
+		//if(document.title != '西瓦羊刀 - 博客园')
 			$('#wrapper1').scrollTo("#box14", 500);
 		
 		

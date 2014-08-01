@@ -412,8 +412,8 @@ $(document).ready(function(){
 				"stroke-width": 6
 			});
 			
-		var play1 = paper.image(imgBaseURL + 'shareid=1678604785&uk=704776812.png', 23, 20, 16, 20).attr(attrPointer),
-			pause1 = paper.image(imgBaseURL + 'shareid=1713598681&uk=704776812.png', 23, 20, 16, 20).hide().attr(attrPointer);
+		var play1 = paper.image('http://occume.github.io/cnblogs/images/play1.png', 23, 20, 16, 20).attr(attrPointer),
+			pause1 = paper.image('http://occume.github.io/cnblogs/images/pause1.png', 23, 20, 16, 20).hide().attr(attrPointer);
 
 		var onPlay,
 			onPause,

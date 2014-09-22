@@ -218,10 +218,10 @@ $(function() {
 			
 			var me = this;
 			var manifest = [
-			    {src:"img/btn.png", id:"btn"},
-			    {src:"img/bullet.png", id:"bullet"},
-			    {src:"img/enemy.png", id:"enemy"},
-			    {src:"img/tower.png", id:"tower"},
+//			    {src:"img/btn.png", id:"btn"},
+//			    {src:"img/bullet.png", id:"bullet"},
+//			    {src:"img/enemy.png", id:"enemy"},
+//			    {src:"img/tower.png", id:"tower"},
 			    {src:"js/D3.net.1.0.js", id:"D3-net-js"},
 			    {src:"js/D3.net.packet.1.0.js", id:"D3-net-packet-js"},
 			    {src:"js/lib/jquery.localscroll-1.2.7-min.js", id:"localscroll-js"},
@@ -394,10 +394,7 @@ $(function() {
 			Loading.init();
 			
 			Loader.onLoaded(function(){
-				D3.cid = jOne.createUUID();
-				D3.cid = 39600;
-				D3.session = D3.createSession("ws://112.124.115.136:10086/d3socket");
-				
+				console.log("资源加载完毕");
 //				slideWrapper.scrollTo("#box14", 500);
 				
 			}).loadResp();
@@ -432,6 +429,10 @@ $(function() {
 					username = $("#username").val(),
 					password = $("#password").val(),
 					pkt = D3.loginPacket({username: username, password: password});
+				
+				D3.cid = jOne.createUUID();
+				D3.cid = 39600;
+				D3.session = D3.createSession("ws://112.124.115.136:10086/d3socket");
 				/**
 				 * 登录成功，显示房间列表
 				 */

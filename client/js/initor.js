@@ -396,8 +396,10 @@ $(function() {
 			Loader.onLoaded(function(){
 				console.log("资源加载完毕");
 //				slideWrapper.scrollTo("#box14", 500);
-				
+				D3.PROTOCOL = "PB";
+//				D3.PROTOCOL = "JSON";
 			}).loadResp();
+			
 			this.bind();
 		},
 		bind : function() {
@@ -441,8 +443,8 @@ $(function() {
 				
 				D3.cid = jOne.createUUID();
 				D3.cid = 39600;
-//				D3.session = D3.createSession("ws://127.0.0.1:10086/d3socket", null, function(){
-					D3.session = D3.createSession("ws://112.124.115.136:10086/d3socket", null, function(){
+				D3.session = D3.createSession("ws://127.0.0.1:10086/d3-server", null, function(){
+//				D3.session = D3.createSession("ws://112.124.115.136:10086/d3-server", null, function(){
 					D3.session.send(pkt);
 				});
 				

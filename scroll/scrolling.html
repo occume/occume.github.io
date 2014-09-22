@@ -247,7 +247,7 @@ var loadMap = function(xmlFile,$viewports,callback) {
 // Call the loadMap function. The callback passed
 // is a function that scrolls each viewport according
 // to mouse movement.
-loadMap("http://occume.oss-cn-hangzhou.aliyuncs.com/map1.tmx", $('#viewports'), function (tileScrollers) {
+loadMap("map1.tmx", $('#viewports'), function (tileScrollers) {
 
     var ts1 = tileScrollers[0],  // Get the three tileScrollers.
         ts2 = tileScrollers[1],

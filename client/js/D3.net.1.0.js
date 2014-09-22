@@ -45,7 +45,10 @@
             ws = new WebSocket(url);            
             ws.onopen = function() {
                 if (state === 0) {
-                    ws.send(message);
+//                    ws.send(message);
+                	state = 1;
+                	if(callback)
+                		callback.apply();
                 } else if (state === 2) {
                     ws.send(getReconnect(config));
                 } else {
@@ -61,9 +64,9 @@
                 if(!evt.act){
                     throw new Error("Event object missing 'type' property.");
                 }
-				if(evt.act === D3.LOG_IN){
-					state = 1;
-                }
+//				if(evt.act === D3.LOG_IN){
+//					state = 1;
+//                }
                 if(evt.act === D3.LOG_IN_FAILURE || evt.type === D3.ROOM_JOIN_FAILURE){
                     ws.close();
                 }

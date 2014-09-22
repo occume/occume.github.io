@@ -257,7 +257,7 @@ $(function() {
 				Loading.loadingOver();
 				if(me.callback)
 					me.callback.call();
-				console.log("complete");
+//				console.log("complete");
 			}
 		}	
 	};
@@ -430,9 +430,6 @@ $(function() {
 					password = $("#password").val(),
 					pkt = D3.loginPacket({username: username, password: password});
 				
-				D3.cid = jOne.createUUID();
-				D3.cid = 39600;
-				D3.session = D3.createSession("ws://112.124.115.136:10086/d3socket");
 				/**
 				 * 登录成功，显示房间列表
 				 */
@@ -442,7 +439,13 @@ $(function() {
 					RoomList.showMe(pkt);
 				});
 				
-				D3.session.send(pkt);
+				D3.cid = jOne.createUUID();
+				D3.cid = 39600;
+//				D3.session = D3.createSession("ws://127.0.0.1:10086/d3socket", null, function(){
+					D3.session = D3.createSession("ws://112.124.115.136:10086/d3socket", null, function(){
+					D3.session.send(pkt);
+				});
+				
 				return false;
 			});
 

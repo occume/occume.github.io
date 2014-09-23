@@ -42,7 +42,8 @@
         var reconnectKey;
 
         function connectWebSocket(url) {
-            ws = new WebSocket(url);            
+            ws = new WebSocket(url);
+            ws.binaryType = "arraybuffer";
             ws.onopen = function() {
                 if (state === 0) {
 //                    ws.send(message);

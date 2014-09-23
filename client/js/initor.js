@@ -434,7 +434,8 @@ $(function() {
 				var 
 					username = $("#username").val(),
 					password = $("#password").val(),
-					pkt = D3.loginPacket({username: username, password: password});
+//					pkt = D3.loginPacket({username: username, password: password});
+					pkt = D3.PB.loginPacket();
 				
 				/**
 				 * 登录成功，显示房间列表
@@ -449,6 +450,7 @@ $(function() {
 				D3.cid = 39600;
 				D3.session = D3.createSession("ws://127.0.0.1:10086/d3-server", null, function(){
 //				D3.session = D3.createSession("ws://112.124.115.136:10086/d3-server", null, function(){
+					D3.session.send(pkt);
 					D3.session.send(pkt);
 				});
 				

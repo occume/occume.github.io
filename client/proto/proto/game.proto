@@ -1,0 +1,12 @@
+package Game;
+
+	option java_package = "org.d3.net.packet.protobuf";
+	option java_outer_classname = "Game";
+
+	// Car
+	message Chat {
+		required string name = 1;
+		required string target = 2;
+		required string info = 3;
+	}
+

@@ -6,6 +6,6 @@
 	}
 	// Initialize ProtoBuf.js
 	var ProtoBuf = dcodeIO.ProtoBuf;
-	var Game = ProtoBuf.loadProtoFile("./proto/ptoto/game.proto").build("Game");
+	var Game = ProtoBuf.loadProtoFile("./proto/proto/game.proto").build("Game");
 	
 }( window.D3 = window.D3 || {}));

@@ -80,7 +80,7 @@
     };
 
 	D3.reqConnPacket = function () {
-        return D3.Codecs.encoder.transform(D3.makePacket(D3.CONNECT, 0));
+        return D3.Codecs[D3.PROTOCOL].encoder.transform(D3.makePacket(D3.CONNECT, 0));
     };
 
 }( window.D3 = window.D3 || {}));

@@ -10,7 +10,8 @@
 		return D3.processors[act + "_" + act_min];
 	};
 	
-    D3.Codecs = {
+    D3.Codecs = {};
+    D3.Codecs.JSON = {
         encoder : {transform: function (e){ return JSON.stringify(e);}},
         decoder : {transform: function (e){
                         var evt = JSON.parse(e);
@@ -60,18 +61,16 @@
             };
             
             ws.onmessage = function (e) {
-				console.log(e.data);
-                var evt = D3.Codecs.decoder.transform(e.data);
-                if(!evt.act){
-                    throw new Error("Event object missing 'type' property.");
+				
+                var resp = D3.Codecs[D3.PROTOCOL].decoder.transform(e.data);
+                if(!resp.module){
+                    throw new Error("error on response");
                 }
-//				if(evt.act === D3.LOG_IN){
-//					state = 1;
-//                }
-                if(evt.act === D3.LOG_IN_FAILURE || evt.type === D3.ROOM_JOIN_FAILURE){
+
+                if(resp.act === D3.LOG_IN_FAILURE || resp.type === D3.ROOM_JOIN_FAILURE){
                     ws.close();
                 }
-				if(evt.act === D3.LOG_IN_SUCCESS){
+				if(resp.act === D3.LOG_IN_SUCCESS){
 					
                     applyProtocol();
                       
@@ -152,7 +151,7 @@
         }
         
         function protocol(e) {
-            var pkt = D3.Codecs.decoder.transform(e.data);
+            var pkt = D3.Codecs[D3.PROTOCOL].decoder.transform(e.data);
             console.log(pkt);
             dispatch(pkt);
         }

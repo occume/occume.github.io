@@ -163,7 +163,7 @@ $(function() {
 				along : digit
 			});
 			this.percent.transform("t800,200").attr({
-				text : digit * 100 + "%"
+				text : (digit * 100).toFixed(0) + "%"
 			});
 		},
 		loading : function() {
@@ -222,16 +222,21 @@ $(function() {
 //			    {src:"img/bullet.png", id:"bullet"},
 //			    {src:"img/enemy.png", id:"enemy"},
 //			    {src:"img/tower.png", id:"tower"},
+				{src:"js/lib/jOne.js", id:"jOne-js"},
 			    {src:"js/D3.net.1.0.js", id:"D3-net-js"},
+			    {src:"js/D3.event.1.0.js", id:"D3-event-js"},
+			    {src:"js/D3.storage.1.0.js", id:"D3-storage-js"},
 			    {src:"js/D3.net.packet.1.0.js", id:"D3-net-packet-js"},
 			    {src:"js/lib/jquery.localscroll-1.2.7-min.js", id:"localscroll-js"},
 			    {src:"js/lib/nbw-parallax.js", id:"nbw-parallax-js"},
 			    {src:"js/lib/scrollTo.js", id:"scrollTo-js"},
-			    {src:"js/lib/jOne.js", id:"jOne-js"},
+			    
 			    {src:"js/lib/ByteBufferAB.min.js", id:"ByteBufferAB-js"},
 			    {src:"js/lib/Long.js", id:"long-js"},
 			    {src:"js/lib/ProtoBuf.min.js", id:"protobuf-min-js"},
 			    {src:"js/D3.net.protobuf.1.0.js", id:"D3-net-protobuf-js"},
+			    {src:"js/D3.ui.1.0.js", id:"D3-ui-js"},
+			    {src:"js/D3.login.1.0.js", id:"D3-login-js"},
 			    {src:"js/D3.chat.1.0.js", id:"D3-chat-js"},
 			    {src:"js/D3.raphael.1.0.js", id:"D3-raphael-js"},
 			    {src:"js/D3.monster.1.0.js", id:"D3-monster-js"},
@@ -273,6 +278,7 @@ $(function() {
 			this.showRooms();
 			this.bind();
 		},
+		
 		showRooms: function(){
 			var me = this;
 			var roomList = $("#room-list ul");
@@ -395,11 +401,15 @@ $(function() {
 
 	var Game = {
 		init : function() {
+			
 			Loading.init();
 			
 			Loader.onLoaded(function(){
 				console.log("资源加载完毕");
 //				slideWrapper.scrollTo("#box14", 500);
+				if(!D3.session){
+					D3.event(D3.event.OFF_LINE);
+				}
 				D3.PROTOCOL = "PB";
 //				D3.PROTOCOL = "JSON";
 			}).loadResp();
@@ -422,42 +432,21 @@ $(function() {
 				return false;
 			});
 
-			$(window).resize(function() {
-				if (me.currPos)
-					$('#wrapper1').stop().scrollTo(me.currPos, 500);
-			});
+//			$(window).resize(function() {
+//				if (me.currPos)
+//					$('#wrapper1').stop().scrollTo(me.currPos, 500);
+//			});
 
 			/**
 			 * 登录按钮
 			 */
 			$("#login-btn").click(function() {
-				var 
-					username = $("#username").val(),
-					password = $("#password").val(),
-//					pkt = D3.loginPacket({username: username, password: password});
-					pkt = D3.PB.loginPacket();
-				
-				/**
-				 * 登录成功，显示房间列表
-				 */
-				D3.addProcessor(D3.ROOM, D3.ROOM_LIST, 
-				function(pkt){
-					Room.init();
-					RoomList.showMe(pkt);
-				});
-				
-				D3.cid = jOne.createUUID();
-				D3.cid = 39600;
-				D3.session = D3.createSession("ws://127.0.0.1:10086/d3-server", null, function(){
-//				D3.session = D3.createSession("ws://112.124.115.136:10086/d3-server", null, function(){
-					D3.session.send(pkt);
-					D3.session.send(pkt);
-				});
-				
+				D3.event(D3.event.DO_LOGIN);
 				return false;
 			});
 
 		}
 	};
+	
 	Game.init();
 });

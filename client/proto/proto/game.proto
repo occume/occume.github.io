@@ -11,8 +11,8 @@ package Game;
 
 	// Chat
 	message Chat {
-		required string name = 1;
-		required string target = 2;
-		required string info = 3;
+		optional string name = 1;
+		optional string target = 2;
+		optional string info = 3;
 	}
 

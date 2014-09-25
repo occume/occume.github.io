@@ -100,6 +100,10 @@ div.navbar-inner{
 	filter: none;
 	text-align: center;
 }
+div.navbar-inner #d3_state img{
+	width: 30px;
+	height: 30px;
+}
 .inner{
 	background: #F2EFE9;
 	position: relative;

@@ -24,7 +24,9 @@
 				var rooms = JSON.parse(pkt.info);
 				D3.event(D3.event.ROOM_LIST, null, rooms);
 			});
+			console.log(123);
 			var rst = D3[D3.PROTOCOL].Packets.roomList();
+			console.log(123);
 			D3.session.send(rst);
 		},
 		enterRoom: function(id){

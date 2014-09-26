@@ -208,9 +208,12 @@
     eve.OFF_LINE = "offline";
     eve.DO_LOGIN = "dologin";
     eve.ON_LOGIN = "onlogin";
-    eve.ROOM_LIST = "roomList";
-    eve.ENTER_ROOM_RST = "enterRoomRst";
+    eve.ROOM_LIST_ASK = "roomListAsk";
+    eve.ROOM_LIST_REP = "roomListRep";
+    eve.ENTER_ROOM_ASK = "enterRoomAsk";
     eve.ENTER_ROOM_REP = "enterRoomRep";
+    eve.CHAT_ASK = "chatAsk";
+    eve.CHAT_REP = "chatRep";
     
     D3.event = eve;
     

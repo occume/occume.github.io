@@ -44,7 +44,7 @@
 	D3.PB.Packets = {
 		login: 	function(user){
 			var constructor = Parser.getParser(D3.Module.LOGIN);
-			var loginMsg = new constructor("八千里路云和月", "123");
+			var loginMsg = new constructor(user.name || "八千里路云和月", "123");
 			var b = new dcodeIO.ByteBuffer(loginMsg.toArrayBuffer().byteLength + 2);
 			b.writeByte(D3.Module.LOGIN);
 			b.writeByte(D3.Module.Login.DFT);
@@ -56,14 +56,25 @@
 		roomList: function(){
 			var b = new dcodeIO.ByteBuffer(2);
 			b.writeByte(D3.Module.CHAT);
-			b.writeByte(D3.Module.Chat.ROOMLIST);
+			b.writeByte(D3.Module.Chat.ROOM_LIST);
 			return b.buffer;
 		},
-		enterRoom: function(data){
-			var b = new dcodeIO.ByteBuffer(2);
+		enterRoom: function(id){
+			var constructor = Parser.getParser(D3.Module.CHAT),
+				msg = new constructor("", "", jOne.String.valueOf(id));
+			var b = new dcodeIO.ByteBuffer(msg.toArrayBuffer().byteLength + 2);
 			b.writeByte(D3.Module.CHAT);
 			b.writeByte(D3.Module.Chat.ENTER_ROOM);
-			b.writeCString(data);
+			b.append(msg.toArrayBuffer());
+			return b.buffer;
+		},
+		chat: function(chatInfo){
+			var constructor = Parser.getParser(D3.Module.CHAT),
+				msg = new constructor(chatInfo.name, chatInfo.target, chatInfo.info);
+			var b = new dcodeIO.ByteBuffer(msg.toArrayBuffer().byteLength + 2);
+			b.writeByte(D3.Module.CHAT);
+			b.writeByte(D3.Module.Chat.CHAT);
+			b.append(msg.toArrayBuffer());
 			return b.buffer;
 		}
 	}; 

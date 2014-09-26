@@ -13,8 +13,8 @@
 			var 
 				username = $("#username").val(),
 				password = $("#password").val(),
-				pkt = D3[D3.PROTOCOL].Packets.login(),
-				user = D3.Storage.get("user");
+				pkt = D3[D3.PROTOCOL].Packets.login({name: username, password: password}),
+				user = D3.Storage.get(D3.Key.USER);
 		
 			if(user && user.online){
 				console.log(user.name + " is online!");
@@ -30,8 +30,8 @@
 			function(pkt){
 				if(pkt.state = D3.STATE.OK){
 					var user = {name: pkt.name, online: !0};
-					D3.session.put("user", user);
-					D3.Storage.put("user", user);
+					D3.session.put(D3.Key.USER, user);
+					D3.Storage.put(D3.Key.USER, user);
 					/**
 					 *  触发上线事件
 					 */

@@ -11,11 +11,16 @@
 	D3.Module.Chat = {
 		DFT: 1,
 		ROOM_LIST: 2,
-		ENTER_ROOM: 3
+		ENTER_ROOM: 3,
+		CHAT: 4
 	};
 	
 	D3.STATE = {
 		OK: "00"	
+	};
+	
+	D3.Key = {
+		USER: "user"
 	};
 
 	D3.processors = {};
@@ -92,6 +97,10 @@
 
 		        socket.onclose = function (e) {
 		        	console.log("close");
+		        	/**
+		        	 * 断开连接 事件
+		        	 */
+		        	D3.event(D3.event.OFF_LINE);
 		        	var user = D3.Storage.get("user");
 		        	user.online = !1;
 		        	D3.Storage.put("user", user);

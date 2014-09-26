@@ -303,5 +303,9 @@ var IS_DONTENUM_BUGGY = (function(){
 	jOne.isArray = Native.IsArray || function(obj){ return toString.call(obj) === "[object Array]";};
 	jOne.isFunction = Native.IsArray || function(obj){ return toString.call(obj) === "[object Function]";};
 	
+	var String = jOne.String = {};
+	String.valueOf = function(obj){
+		return obj + "";
+	};
 })()
 ;

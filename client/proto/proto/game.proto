@@ -14,5 +14,6 @@ package Game;
 		optional string name = 1;
 		optional string target = 2;
 		optional string info = 3;
+		optional string state = 4;
 	}
 

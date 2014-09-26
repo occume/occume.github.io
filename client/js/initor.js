@@ -202,7 +202,7 @@ $(function() {
 			me.percent.remove();
 			me.baseProgress.remove();
 			loginRow.animate({
-				marginLeft : "10%"
+				marginLeft : ""
 			}, function() {
 				loginForm.show();
 			});
@@ -419,18 +419,18 @@ $(function() {
 		bind : function() {
 			var me = this;
 
-			$(document).delegate('a.link', 'click', function() {
-				var n = $(this).parent().parent().attr("pp");
-				var href = $(this).attr('href');
-				me.currPos = href;
-
-				if (href.indexOf("file" != 0)) {
-					href = href.slice(-6);
-				}
-
-				$('#wrapper1').scrollTo(href, 500);
-				return false;
-			});
+//			$(document).delegate('a.link', 'click', function() {
+//				var n = $(this).parent().parent().attr("pp");
+//				var href = $(this).attr('href');
+//				me.currPos = href;
+//
+//				if (href.indexOf("file" != 0)) {
+//					href = href.slice(-6);
+//				}
+//
+//				$('#wrapper1').scrollTo(href, 500);
+//				return false;
+//			});
 
 //			$(window).resize(function() {
 //				if (me.currPos)

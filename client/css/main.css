@@ -1,12 +1,12 @@
 #header {
 	background-color: #f7f7f9;
-	width: 1200px;
+	width: 73%;
 	margin: 0 auto;
-	height: 100px;
+	display:none;
 }
 
 .header-top {
-	height: 100px;
+	
 }
 
 .header-bottom {
@@ -100,25 +100,29 @@ div.navbar-inner{
 	filter: none;
 	text-align: center;
 }
-div.navbar-inner #d3_state img{
-	width: 30px;
-	height: 30px;
+nav div.collapse{
+	margin: 0 auto;
+	width: 500px;
+}
+nav #d3_state img{
+	width: 20px;
+	height: 20px;
 }
 .inner{
 	background: #F2EFE9;
 	position: relative;
-	width: 1185px;
+	width: 75%;
 	margin: 0 auto;
-	min-height: 600px;
+	min-height: 700px;
 	padding: 15px 0 0 15px;
 	*padding: 65px 0 0 15px;
 	overflow: hidden;
 }
 .inner .wrp{
-	width: 90%;
+	
 }
 .next-step{
-	margin-left: 35px;
+	
 }
 div.next-step dl dd{
 	background-color: #C09853;
@@ -132,26 +136,23 @@ div.next-step dl dd{
 }
 
 #box11 .content .inner .row{
-	margin-top: 50px;
-	margin-left: 30%;
+	
 }
 #box11 .content .inner img{
 	
 }
 #box11 .login-form{
-
-	padding-top: 75px;
-	
+	width: 40%;
+	padding-top: 150px;
 }
 #box11 .login-form form{
 	position: relative;
 	z-index:2;
-	margin-left: -80px;
-	color: #C09853;
 }
 #box11 .login-form form :hover{
 	text-decoration: none;
 }
+
 .inner .compent dt{
 	margin:10px 0;
 }
@@ -162,6 +163,13 @@ div.next-step dl dd{
 .inner .compent dd ul{
 	overflow: hidden;
 }
+.d3-room-list li{
+	float:left;
+	width: 30%;
+	margin:10px;
+	padding: 10px;
+	cursor: pointer;
+}
 #box12 .inner .compent dd ul li{
 	background: #ffffff;
 	margin:10px;
@@ -170,8 +178,23 @@ div.next-step dl dd{
 	width: 30%;
 	cursor: pointer;
 }
+#box12 .next-step{
+	width:30%;
+	margin:20px 0 0 10px;
+}
 #box12 .inner .compent dd ul li:hover{
 	background: #C09853;
+}
+
+#box13 #d3-chat-box{
+	background: #ffffff;
+	height:400px;
+	margin-bottom: 15px;
+	overflow-y:auto; 
+}
+
+#box13 #d3-chat-input{
+	margin-bottom: 15px;
 }
 
 #box13 .inner .compent dd ul li{
@@ -204,10 +227,9 @@ div.next-step dl dd{
 }
 #footer{
 	height: 100px;
-	overflow: scroll;
 }
 /*** sbox ***/
-#wrap{position:absolute;padding:3px;background:#000;}
+#wrap{position:absolute;padding:3px;background:#000;display:none;}
 #sb{position:relative;}
 #inbox input{width:300px;font-size:20px;padding:5px 0 3px 5px;}
 		
@@ -219,6 +241,6 @@ filter:Alpha(opacity=60);background:#333;/*ÊµÏÖIE±³¾°Í¸Ã÷*/}
 #wrap #sb #logo{position:absolute;top:3px;left:3px;}
 #wrap #sb #logo img{width:30px;height:30px;}
 #wrap #inbox input{width:400px;font-size:18px;padding:8px 0 5px 40px;margin-bottom: 0px;}
-#help{width:443px;height:200px;position:absolute;border:3px solid #69c;background:#fff;}
+#help{width:443px;height:200px;position:absolute;border:3px solid #69c;background:#fff;display:none;}
 #im{position:absolute;width:500px;}
 #im p{font-size:25px;margin:10px 0 0 0;font-weight:900;font-family:cursive;}

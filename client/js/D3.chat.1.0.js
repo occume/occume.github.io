@@ -4,19 +4,28 @@
 	D3.Chat = {
 		init: function(){
 			D3.addProcessor(D3.Module.CHAT, D3.Module.Chat.ENTER_ROOM,
-					function(rep){
-						/**
-						 * 加入房间 事件
-						 */
-						D3.event(D3.event.ENTER_ROOM_REP, null, rep);
-					});
+			function(rep){
+				/**
+				 * 加入房间 事件
+				 */
+				D3.event(D3.event.ENTER_ROOM_REP, null, rep);
+			});
+			
+			D3.addProcessor(D3.Module.CHAT, D3.Module.Chat.LEAVE_ROOM,
+			function(rep){
+				/**
+				 * 离开房间 事件
+				 */
+				D3.event(D3.event.LEAVE_ROOM_REP, null, rep);
+			});
+			
 			D3.addProcessor(D3.Module.CHAT, D3.Module.Chat.CHAT,
-					function(rep){
-						/**
-						* 聊天信息 事件
-						*/
-						D3.event(D3.event.CHAT_REP, null, rep);
-					});
+			function(rep){
+				/**
+				* 聊天信息 事件
+				*/
+				D3.event(D3.event.CHAT_REP, null, rep);
+			});
 			this.register();
 		},
 		register: function(){

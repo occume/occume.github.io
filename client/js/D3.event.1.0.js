@@ -212,6 +212,7 @@
     eve.ROOM_LIST_REP = "roomListRep";
     eve.ENTER_ROOM_ASK = "enterRoomAsk";
     eve.ENTER_ROOM_REP = "enterRoomRep";
+    eve.LEAVE_ROOM_REP = "leaveRoomRep";
     eve.CHAT_ASK = "chatAsk";
     eve.CHAT_REP = "chatRep";
     

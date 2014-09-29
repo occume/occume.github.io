@@ -238,6 +238,7 @@ $(function() {
 			    {src:"js/D3.ui.1.0.js", id:"D3-ui-js"},
 			    {src:"js/D3.login.1.0.js", id:"D3-login-js"},
 			    {src:"js/D3.chat.1.0.js", id:"D3-chat-js"},
+			    {src:"js/D3.sbox.1.0.js", id:"D3-sbox-js"},
 			    {src:"js/D3.raphael.1.0.js", id:"D3-raphael-js"},
 			    {src:"js/D3.monster.1.0.js", id:"D3-monster-js"},
 			    {src:"js/D3.turret.1.0.js", id:"D3-turret-js"},

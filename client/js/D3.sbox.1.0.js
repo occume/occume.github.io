@@ -21,7 +21,7 @@
 				var scrTop = $win.scrollTop();
 				$wrap.css({
 					left : (winWidth - wrapWidth) / 2,
-					top : (scrTop + winHeight - 80)
+					top : (scrTop + winHeight - 150)
 				});
 				$("#help").css({
 					left : 0,

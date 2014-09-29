@@ -19,8 +19,13 @@
 			$("#d3_state img").attr("src", "/client/img/red.png");
 		},
 		bind: function(){
+			
 			$("#d3_room").click(function(){
 				_main.showRoom();
+			});
+			
+			$("#d3_hall").click(function(){
+				_main.showHall();
 			});
 		}
 	});
@@ -43,6 +48,9 @@
 		},
 		showRoom: function(rep){
 			this.main.scrollTo("#box13", 500);
+		},
+		showHall: function(rep){
+			this.main.scrollTo("#box12", 500);
 		}
 	});
 	var _main = D3.UI.Main = new Main();
@@ -58,6 +66,7 @@
 			 */
 			D3.event.on(D3.event.ROOM_LIST_REP, this.onRoomList.bind(this));
 			D3.event.on(D3.event.ENTER_ROOM_REP, this.onEnterRoom.bind(this));
+			D3.event.on(D3.event.LEAVE_ROOM_REP, this.onLeaveRoom.bind(this));
 			D3.event.on(D3.event.CHAT_REP, this.onChat.bind(this));
 		},
 		onRoomList: function(rep){
@@ -84,6 +93,31 @@
 			 */
 			var room = JSON.parse(rep.info);
 			$("#room" + room.id).find("span").html(room.number);
+			/**
+			 * 房间用户列表
+			 */
+			this.renderList(room.players);
+		},
+		onLeaveRoom: function(rep){
+			/**
+			 *  更新房间人数
+			 */
+			var room = JSON.parse(rep.info);
+			$("#room" + room.id).find("span").html(room.number);
+			/**
+			 * 房间用户列表
+			 */
+			this.renderList(room.players);
+		},
+		renderList: function(list){
+			var playerList = $("#d3-chat-player-list"),
+				html = "";
+			$(list).each(function(idx, itm){
+				html += '<li class="list-group-item">'+ itm.name +'</li>';
+			});
+			
+			playerList.html("");
+			playerList.html(html);
 		},
 		onChat: function(rep){
 			var name = rep.name,

@@ -12,7 +12,8 @@
 		DFT: 1,
 		ROOM_LIST: 2,
 		ENTER_ROOM: 3,
-		CHAT: 4
+		LEAVE_ROOM: 4,
+		CHAT: 5
 	};
 	
 	D3.STATE = {

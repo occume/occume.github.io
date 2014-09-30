@@ -11,9 +11,11 @@ package Game;
 
 	// Chat
 	message Chat {
-		optional string name = 1;
-		optional string target = 2;
-		optional string info = 3;
-		optional string state = 4;
+		optional string type = 1;
+		optional string name = 2;
+		optional string target = 3;
+		optional string info = 4;
+		optional string state = 5;
+		optional string stateDesc = 6;
 	}
 

@@ -186,7 +186,7 @@ div.next-step dl dd{
 	background: #C09853;
 }
 
-#box13 #d3-chat-box{
+.d3-chat-box{
 	background: #ffffff;
 	height:400px;
 	margin-bottom: 15px;
@@ -231,6 +231,9 @@ div.next-step dl dd{
 }
 #box14 .inner .compent dd ul li div.divider-horizontal{
 	padding: 0;
+}
+.panel{
+	background: #ffffff;
 }
 #footer{
 	height: 100px;

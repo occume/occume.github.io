@@ -62,7 +62,7 @@
 	};
 	
 	D3.Game = Game;
-	Game.init();
+//	Game.init();
 //	Game.start();
 	
 }( window.D3 = window.D3 || {}));

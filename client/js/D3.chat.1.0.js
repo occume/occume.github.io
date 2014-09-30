@@ -24,7 +24,15 @@
 				/**
 				* 聊天信息 事件
 				*/
-				D3.event(D3.event.CHAT_REP, null, rep);
+				if(rep.type == "ALL"){
+					
+				}
+				else if(rep.type == "ROOM"){
+					D3.event(D3.event.CHAT_2_ROOM_REP, null, rep);
+				}
+				else{
+					D3.event(D3.event.CHAT_2_ONE_REP, null, rep);
+				}
 			});
 			this.register();
 		},
@@ -34,7 +42,7 @@
 			 */
 			D3.event.on(D3.event.ON_LOGIN, this.askRoomList);
 			D3.event.on(D3.event.ENTER_ROOM_ASK, this.askEnterRoom);
-			D3.event.on(D3.event.CHAT_ASK, this.askChat);
+			D3.event.on(D3.event.CHAT_2_ROOM_ASK, this.askChat2Room);
 		},
 		askRoomList: function(){
 			
@@ -54,17 +62,14 @@
 		},
 		askEnterRoom: function(id){
 			
-			
-			
 			var rst = D3[D3.PROTOCOL].Packets.enterRoom(id);
 			D3.session.send(rst);
 		},
-		askChat: function(msg){
-			
-			
-			console.log(msg);
+		askChat2Room: function(msg){
+	
 			var user = D3.session.get(D3.Key.USER),
 				chatInfo = {name: user.name,
+							type: "ROOM",
 							target: "",
 							info: msg},
 				rst = D3[D3.PROTOCOL].Packets.chat(chatInfo);

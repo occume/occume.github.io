@@ -223,6 +223,7 @@ $(function() {
 //			    {src:"img/enemy.png", id:"enemy"},
 //			    {src:"img/tower.png", id:"tower"},
 				{src:"js/lib/jOne.js", id:"jOne-js"},
+				{src:"js/lib/underscore.js", id:"underscore-js"},
 			    {src:"js/D3.net.1.0.js", id:"D3-net-js"},
 			    {src:"js/D3.event.1.0.js", id:"D3-event-js"},
 			    {src:"js/D3.storage.1.0.js", id:"D3-storage-js"},

@@ -7,16 +7,37 @@
 		init: function(){
 			this.register();
 			this.bind();
+			this.messageBox = $("#d3_msg_box");
 		},
 		register: function(){
 			D3.event.on(D3.event.ON_LINE, this.online);
 			D3.event.on(D3.event.OFF_LINE, this.offline);
+			D3.event.on(D3.event.CHAT_2_ONE_REP, this.updateMessageBox.bind(this));
+			D3.event.on(D3.event.CHAT_2_ONE_REP, this.updateMessageBox.bind(this));
 		},
 		online: function(){
 			$("#d3_state img").attr("src", "/client/img/green.png");
 		},
 		offline: function(){
 			$("#d3_state img").attr("src", "/client/img/red.png");
+		},
+		updateMessageBox: function(rep){
+			if(rep.name == D3.session.user().name){
+				return;
+			}
+			if(rep.type == "ROOM" && _main.inScreen == _main.SCREEN.ROOM){
+				return;
+			}
+			if(rep.type == "ONE" && _main.inScreen == _main.SCREEN.DIALOG){
+				return;
+			}
+			var msgBox = this.messageBox,
+				msgCount = msgBox.find("#d3_msg_count"),
+				count = parseInt(msgCount.html());
+			msgCount.html(count + 1);
+			
+			var msgItem = msgBox.find("a");
+			msgItem.attr("data-content", "一个消息");
 		},
 		bind: function(){
 			
@@ -27,6 +48,12 @@
 			$("#d3_hall").click(function(){
 				_main.showHall();
 			});
+			
+			$("#d3_dialog").click(function(){
+				_main.showDialog();
+			});
+			
+			$("#d3_msg_box a").popover();
 		}
 	});
 	D3.UI.Statu = new Statu();
@@ -35,22 +62,39 @@
 		init: function(){
 			this.register();
 			this.main = $("#wrapper1");
+			this.inScreen = 1;
+		},
+		SCREEN: {
+			LOGIN: 1,
+			HALL: 2,
+			ROOM: 3,
+			DIALOG: 4
 		},
 		register: function(){
 			D3.event.on(D3.event.ON_LINE, this.online.bind(this));
 			D3.event.on(D3.event.OFF_LINE, this.offline.bind(this));
 		},
 		online: function(){
-			this.main.scrollTo("#box12", 500);
+			this.showHall();
 		},
 		offline: function(){
+			this.showLogin();
+		},
+		showLogin: function(){
 			this.main.scrollTo("#box11", 500);
+			this.inScreen = this.SCREEN.LOGIN;
 		},
 		showRoom: function(rep){
 			this.main.scrollTo("#box13", 500);
+			this.inScreen = this.SCREEN.ROOM;
 		},
 		showHall: function(rep){
 			this.main.scrollTo("#box12", 500);
+			this.inScreen = this.SCREEN.HALL;
+		},
+		showDialog: function(){
+			this.main.scrollTo("#box14", 500);
+			this.inScreen = this.SCREEN.DIALOG;
 		}
 	});
 	var _main = D3.UI.Main = new Main();
@@ -67,7 +111,8 @@
 			D3.event.on(D3.event.ROOM_LIST_REP, this.onRoomList.bind(this));
 			D3.event.on(D3.event.ENTER_ROOM_REP, this.onEnterRoom.bind(this));
 			D3.event.on(D3.event.LEAVE_ROOM_REP, this.onLeaveRoom.bind(this));
-			D3.event.on(D3.event.CHAT_REP, this.onChat.bind(this));
+			D3.event.on(D3.event.CHAT_2_ROOM_REP, this.onChat2Room.bind(this));
+			D3.event.on(D3.event.CHAT_2_ONE_REP, this.onChat2One.bind(this));
 		},
 		onRoomList: function(rep){
 			
@@ -119,11 +164,13 @@
 			playerList.html("");
 			playerList.html(html);
 		},
-		onChat: function(rep){
+		onChat2Room: function(rep){
+			if(_main.inScreen != _main.SCREEN.ROOM){
+				return;
+			}
 			var name = rep.name,
-				target = rep.target,
 				info = rep.info;
-			var box = $("#d3-chat-box");
+			var box = $("#box13 .d3-chat-box");
 			var chatItem = $('<div class="alert alert-success" role="alert">'+ name + ": "+ info +'</div>')
 							.appendTo(box);
 			box.scrollTop(
@@ -131,10 +178,35 @@
 				);
 			$("#d3-chat-input textarea").focus();
 		},
+		onChat2One: function(rep){
+		
+			var tabs = $("#box14 .nav-tabs"),
+				tabContents = $("#box14 .tab-content"),
+				html = "";
+		
+			if(!this.tabList){
+				this.tabList = [];
+			}
+			if(_.indexOf(this.tabList, rep.target) == -1){
+				this.tabList.push(rep.target);
+				var id = _.indexOf(this.tabList, rep.target),
+					tabId = "one-tab-" + id,
+					tabContentId = "on-tab-content-" + id;
+				html = '<li class="active" role="presentation" id="'+ tabId +'"><a href="#'+ tabContentId +'">'+ rep.target +'</a></li>';
+				tabs.append(html);
+				html = '<div id="'+ tabContentId +'" class="tab-pane fade active in d3-chat-box">'+ rep.info +'</div>';
+				tabContents.append(html);
+			}
+			else{
+				
+			}
+			
+		},
 		bind: function(){
 			var rooms = $(".d3-room-list ul li"),
 				me = this;
-			rooms.live("click", function() {
+			$(document).on("click", "#box12 ul li", function() {
+				
 				var self = $(this);
 				self.siblings().css({
 					background : "#FFFFFF"
@@ -156,10 +228,34 @@
 			sendBtn.click(function(){
 				var msg = chatInput.val();
 				chatInput.val("");
-				D3.event(D3.event.CHAT_ASK, null, msg);
+				D3.event(D3.event.CHAT_2_ROOM_ASK, null, msg);
 			});
 		}
 	});
 	D3.UI.Room = new Room();
+	
+	var Dialog = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			
+		},
+		bind: function(){
+			$(document).on("click", "#box14 ul li", function(){
+				var me = $(this),
+					target = me.children("a").attr("href");
+				me.siblings().removeClass("active");
+				me.addClass("active");
+				
+				var tab = $(target);
+				tab.siblings().removeClass("active fade in");
+				tab.addClass("active fade in");
+				return false;
+			});
+		}
+	});
+	var _dialog = D3.UI.Dialog = new Dialog();
 	
 }( window.D3 = window.D3 || {}));

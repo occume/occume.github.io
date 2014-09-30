@@ -61,7 +61,7 @@
 		},
 		enterRoom: function(id){
 			var constructor = Parser.getParser(D3.Module.CHAT),
-				msg = new constructor("", "", jOne.String.valueOf(id));
+				msg = new constructor("ROOM", "", "", jOne.String.valueOf(id));
 			var b = new dcodeIO.ByteBuffer(msg.toArrayBuffer().byteLength + 2);
 			b.writeByte(D3.Module.CHAT);
 			b.writeByte(D3.Module.Chat.ENTER_ROOM);
@@ -70,7 +70,7 @@
 		},
 		chat: function(chatInfo){
 			var constructor = Parser.getParser(D3.Module.CHAT),
-				msg = new constructor(chatInfo.name, chatInfo.target, chatInfo.info);
+				msg = new constructor(chatInfo.type, chatInfo.name, chatInfo.target, chatInfo.info);
 			var b = new dcodeIO.ByteBuffer(msg.toArrayBuffer().byteLength + 2);
 			b.writeByte(D3.Module.CHAT);
 			b.writeByte(D3.Module.Chat.CHAT);

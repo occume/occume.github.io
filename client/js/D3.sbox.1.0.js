@@ -75,7 +75,7 @@
 						me.show();
 					}
 				});
-				$("#inbox :input").live("keypress", function(e) {
+				$("#inbox :input").bind("keypress", function(e) {
 
 					e = e || win.event;
 					var kc = e.keyCode, val = $(this).val();
@@ -96,26 +96,27 @@
 	 * 
 	 */
 	(function() {
-		var orderReg = /-(?:(\w+)\s(.+)|(\d+))|.*/;
+//		var orderReg = /\/(?:(\w+)\s(.+)|(\d+))|.*/;
+		var orderReg = /\/(\w{1})\s([^\s]+)\s(.+)/;;
 		var parse = function(info) {
 			var ret = orderReg.exec(info);
 			if (!ret) {
 				SBOX.close();
 				return;
 			}
-			if (ret[1]) {
-				if (ret[1] in parse) {
-					parse[ret[1]](ret[2]);
-				} else {
-
-				}
+//			if (ret[1]) {
+//				if (ret[1] in parse) {
+//					parse[ret[1]](ret[2]);
+//				} else {
+//
+//				}
+//				return;
+//			}
+			if (ret[1] == "m") {
+				parse.IM(ret[2], ret[3]);
 				return;
 			}
-			if (ret[3]) {
-				parse.query(ret[3]);
-				return;
-			}
-			parse.IM(ret[0]);
+			
 		}
 		/**
 		 * 快速打开链接
@@ -160,10 +161,10 @@
 		/**
 		 * IM
 		 */
-		parse.IM = function(msg) {
+		parse.IM = function(name, msg) {
 			SBOX.close();
 			
-			var name = $("#welcome").text().substring(4);
+//			var name = $("#welcome").text().substring(4);
 			$("#im").fadeIn();
 //			$.ajax({
 //				url : "/im/sendIM",
@@ -174,10 +175,13 @@
 //				},
 //				cache : false
 //			});
-			D3.addProcessor(D3.CHAT, D3.CHAT_TO_ALL, function(pkt){
-				showIM(pkt);
-			});
-			D3.session.send(D3.makePacketByType(D3.CHAT, D3.CHAT_TO_ALL, msg));
+//			D3.addProcessor(D3.CHAT, D3.CHAT_TO_ALL, function(pkt){
+//				showIM(pkt);
+//			});
+			console.log(msg);
+			var user = D3.session.get(D3.Key.USER),
+				ask = D3[D3.PROTOCOL].Packets.chat({type: "ONE", name: user.name, target: name, info: msg});
+			D3.session.send(ask);
 		};
 		/**
 		 * 异常提示

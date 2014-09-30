@@ -213,8 +213,10 @@
     eve.ENTER_ROOM_ASK = "enterRoomAsk";
     eve.ENTER_ROOM_REP = "enterRoomRep";
     eve.LEAVE_ROOM_REP = "leaveRoomRep";
-    eve.CHAT_ASK = "chatAsk";
-    eve.CHAT_REP = "chatRep";
+    eve.CHAT_2_ROOM_ASK = "chat2RoomAsk";
+    eve.CHAT_2_ROOM_REP = "chat2RoomRep";
+    eve.CHAT_2_ONE_ASK = "chat2OneAsk";
+    eve.CHAT_2_ONE_REP = "chat2OneRep";
     
     D3.event = eve;
     

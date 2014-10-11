@@ -100,10 +100,7 @@ div.navbar-inner{
 	filter: none;
 	text-align: center;
 }
-nav div.collapse{
-	margin: 0 auto;
-	width: 500px;
-}
+
 nav #d3_state img{
 	width: 20px;
 	height: 20px;

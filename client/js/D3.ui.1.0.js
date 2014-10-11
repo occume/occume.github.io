@@ -13,7 +13,7 @@
 			D3.event.on(D3.event.ON_LINE, this.online);
 			D3.event.on(D3.event.OFF_LINE, this.offline);
 			D3.event.on(D3.event.CHAT_2_ONE_REP, this.updateMessageBox.bind(this));
-			D3.event.on(D3.event.CHAT_2_ONE_REP, this.updateMessageBox.bind(this));
+			D3.event.on(D3.event.CHAT_2_ONE_REP, this.onChat2One.bind(this));
 		},
 		online: function(){
 			$("#d3_state img").attr("src", "/client/img/green.png");
@@ -38,6 +38,11 @@
 			
 			var msgItem = msgBox.find("a");
 			msgItem.attr("data-content", "一个消息");
+		},
+		onChat2One: function(rep){
+			console.log(rep);
+			var navbar = $("#navbar");
+			navbar.append('<li id=""><a href="">'+ rep.name +'</a></li>');
 		},
 		bind: function(){
 			

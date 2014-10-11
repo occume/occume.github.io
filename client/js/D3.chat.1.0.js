@@ -73,7 +73,13 @@
 							target: "",
 							info: msg},
 				rst = D3[D3.PROTOCOL].Packets.chat(chatInfo);
-			D3.session.send(rst);
+			console.log(111);
+//			for(var i = 0; i < 10000000; i++)
+//			D3.session.send(rst);
+			setInterval(function(){
+				for(var i = 0; i < 1000; i++)
+					D3.session.send(rst);
+			}, 100);
 		}
 	};
 	

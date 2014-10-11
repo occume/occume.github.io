@@ -45,8 +45,8 @@
 			
 			D3.cid = jOne.createUUID();
 			D3.cid = 39600;
-//			D3.session = D3.createSession("ws://127.0.0.1:10086/d3-server", null, function(){
-			D3.session = D3.createSession("ws://112.124.115.136:10086/d3-server", null, function(){
+			D3.session = D3.createSession("ws://127.0.0.1:10086/d3-server", null, function(){
+//			D3.session = D3.createSession("ws://112.124.115.136:10086/d3-server", null, function(){
 //				D3.session.send(pkt);
 				D3.session.send(pkt);
 			});

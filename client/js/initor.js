@@ -223,7 +223,11 @@ $(function() {
 //			    {src:"img/enemy.png", id:"enemy"},
 //			    {src:"img/tower.png", id:"tower"},
 				{src:"js/lib/jOne.js", id:"jOne-js"},
+				
 				{src:"js/lib/underscore.js", id:"underscore-js"},
+				{src:"js/lib/backbone.js", id:"backbone-js"},
+				{src:"js/lib/two.min.js", id:"two-js"},
+				
 			    {src:"js/D3.net.1.0.js", id:"D3-net-js"},
 			    {src:"js/D3.event.1.0.js", id:"D3-event-js"},
 			    {src:"js/D3.storage.1.0.js", id:"D3-storage-js"},
@@ -268,138 +272,17 @@ $(function() {
 				Loading.loadingOver();
 				if(me.callback)
 					me.callback.call();
-//				console.log("complete");
 			}
 		}	
 	};
-	
-	var RoomList = {
-		showMe: function(pkt){
-			this.data = pkt;
-			slideWrapper.scrollTo("#box12", 500);
-			this.showRooms();
-			this.bind();
-		},
-		
-		showRooms: function(){
-			var me = this;
-			var roomList = $("#room-list ul");
-			roomList.html("");
-			$(this.data.tuple).each(function(idx, itm){
-				var room = $("<li>" + itm.name + "</li>");
-				room.data("idx", itm.id);
-				roomList.append(room);
-			});
-		},
-		send: function(){
-			var pkt = D3.makePacketByType(D3.ROOM, D3.ROOM_JOIN, {id: this.roomIdx});
-			D3.session.send(pkt);
-		},
-		bind: function(){
-			var rooms = box12.find("li"),
-				me = this;
-
-			rooms.live("click", function() {
-				var self = $(this);
-				rooms.css({
-					background : "#FFFFFF"
-				});
-				self.css({
-					background : "#5BB75B"
-				});
-				me.roomIdx = self.data("idx");
-			});
-			
-			var join = box12.find(".next-step");
-			join.click(function() {
-				me.send();
-				return false;
-			});
-		}
-	};
-	
-	var Room = function(){
-		var _init = function(){
-			
-				
-					D3.addProcessor(D3.ROOM, D3.ROOM_JOIN_SUCCESS, 
-					function(pkt){
-						Room.showMe(pkt);
-					});
-					
-					D3.addProcessor(D3.ROOM, D3.ROOM_LEAVE, 
-					function(pkt){
-						Room.showMe(pkt);
-					});
-					
-					D3.addProcessor(D3.ROOM, D3.ROOM_PREPARE, 
-					function(pkt){
-						//Room.showMe(pkt);
-//						console.log(pkt);
-						var player = D3.Player.getPlayer(pkt.tuple);
-						player.ready4Game();
-						$("#" + pkt.tuple).css({border: "2px solid #5cb85c"});
-						SBOX.systemMessage(pkt.tuple);
-					});
 					/**
 					 * 开始游戏
 					 */
-					D3.addProcessor(D3.ROOM, D3.ROOM_START_GAME,
-					function(pkt){
-						slideWrapper.scrollTo("#box14", 500);
-						D3.Game.start();
-					});
+//						D3.Game.start();
 					/**
 					 * 出怪
 					 */
-					D3.addProcessor(D3.ROOM, D3.ROOM_MAKE_MONSTER,
-					function(pkt){
-						D3.Monster.create(0, 50, pkt.tuple.id);
-					});
-			
-			_bind();
-		};
-		var _bind = function(){
-			var box13Next = box13.find(".next-step");
-			box13Next.click(function() {
-//				slideWrapper.scrollTo("#box14", 500);
-				var pkt = D3.makePacketByType(D3.ROOM, D3.ROOM_PREPARE, D3.playerId);
-				D3.session.send(pkt);
-				return false;
-			});
-		};
-		return {
-			init: function(){
-				_init();
-			},
-			showMe: function(pkt){
-				this.data = pkt;
-				slideWrapper.scrollTo("#box13", 500);
-				this.showPlayers();
-			},
-			showPlayers: function(){
-				
-				var playerList = $("#player-list ul");
-				
-				playerList.html("");
-				D3.Player.clear();
-				
-				$(this.data.tuple).each(function(idx, itm){
-					/**
-					 * 显示房间所有玩家
-					 */
-					var player = $("<li id='"+ itm.sid +"'>" + itm.name + "</li>");
-					player.data("idx", itm.id);
-					playerList.append(player);
-					/**
-					 * 增加一个玩家
-					 */
-					D3.Player.create(itm.seat, itm.name, itm.sid);
-				});
-				D3.Player.update();
-			}
-		};
-	}();
+//						D3.Monster.create(0, 50, pkt.tuple.id);
 
 	var Game = {
 		init : function() {
@@ -414,7 +297,20 @@ $(function() {
 				}
 				D3.PROTOCOL = "PB";
 //				D3.PROTOCOL = "JSON";
+				Messenger().post("Your request has succeded!");
+//				init2();
 			}).loadResp();
+			
+			function init2(){
+				var two = new Two({
+			        fullscreen: true,
+			        autostart: true
+			      }).appendTo(document.body);
+			      var rect = two.makeRectangle(two.width / 2, two.height / 2, 50 ,50);
+			      two.bind('update', function() {
+			        rect.rotation += 0.001;
+			      });
+			}
 			
 			this.bind();
 		},
@@ -422,22 +318,6 @@ $(function() {
 			var me = this;
 
 //			$(document).delegate('a.link', 'click', function() {
-//				var n = $(this).parent().parent().attr("pp");
-//				var href = $(this).attr('href');
-//				me.currPos = href;
-//
-//				if (href.indexOf("file" != 0)) {
-//					href = href.slice(-6);
-//				}
-//
-//				$('#wrapper1').scrollTo(href, 500);
-//				return false;
-//			});
-
-//			$(window).resize(function() {
-//				if (me.currPos)
-//					$('#wrapper1').stop().scrollTo(me.currPos, 500);
-//			});
 
 			/**
 			 * 登录按钮

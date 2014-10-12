@@ -55,7 +55,7 @@
 			});
 			
 			$("#d3_dialog").click(function(){
-				_main.showDialog();
+				$("#main-panel").toggle();
 			});
 			
 			$("#d3_msg_box a").popover();
@@ -185,21 +185,26 @@
 		},
 		onChat2One: function(rep){
 		
-			var tabs = $("#box14 .nav-tabs"),
-				tabContents = $("#box14 .tab-content"),
+			var tabs = $("#main-panel .nav-tabs"),
+				tabContents = $("#main-panel .tab-content"),
+				activeClass,
 				html = "";
 		
 			if(!this.tabList){
 				this.tabList = [];
+				this.tabActive = !0;
 			}
 			if(_.indexOf(this.tabList, rep.target) == -1){
 				this.tabList.push(rep.target);
+				if(!this.tabActive){
+					activeClass = "active";
+				}
 				var id = _.indexOf(this.tabList, rep.target),
 					tabId = "one-tab-" + id,
 					tabContentId = "on-tab-content-" + id;
-				html = '<li class="active" role="presentation" id="'+ tabId +'"><a href="#'+ tabContentId +'">'+ rep.target +'</a></li>';
+				html = '<li class="'+ activeClass +'" id="'+ tabId +'"><a data-toggle="tab" role="tab" href="#'+ tabContentId +'">'+ rep.target +'</a></li>';
 				tabs.append(html);
-				html = '<div id="'+ tabContentId +'" class="tab-pane fade active in d3-chat-box">'+ rep.info +'</div>';
+				html = '<div id="'+ tabContentId +'" class="tab-pane fade '+ activeClass +' in d3-chat-box">'+ rep.info +'</div>';
 				tabContents.append(html);
 			}
 			else{

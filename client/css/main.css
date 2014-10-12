@@ -1,18 +1,3 @@
-#header {
-	background-color: #f7f7f9;
-	width: 73%;
-	margin: 0 auto;
-	display:none;
-}
-
-.header-top {
-	
-}
-
-.header-bottom {
-	height: 0px;
-}
-
 #container {
 	width: 100%;
 	position: relative;
@@ -115,12 +100,7 @@ nav #d3_state img{
 	*padding: 65px 0 0 15px;
 	overflow: hidden;
 }
-.inner .wrp{
-	
-}
-.next-step{
-	
-}
+
 div.next-step dl dd{
 	background-color: #C09853;
 	padding: 4px;
@@ -129,15 +109,7 @@ div.next-step dl dd{
 	line-height: 30px;
 	cursor: pointer;
 }
-#box11 .content{
-}
 
-#box11 .content .inner .row{
-	
-}
-#box11 .content .inner img{
-	
-}
 #box11 .login-form{
 	width: 40%;
 	padding-top: 150px;
@@ -185,11 +157,12 @@ div.next-step dl dd{
 
 .d3-chat-box{
 	background: #ffffff;
-	height:400px;
-	margin-bottom: 15px;
+	min-height:350px;
+	margin:15px 0 15px 0;
 	overflow-y:auto; 
 }
-
+#d3-chat-input{margin:15px 0 15px 0;}
+#d3-chat-send{margin:0 0 15px 0;}
 #box13 #d3-chat-input{
 	margin-bottom: 15px;
 }
@@ -232,16 +205,19 @@ div.next-step dl dd{
 .panel{
 	background: #ffffff;
 }
+#main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;display:none;min-height:600px;}
+#main-panel .container{background:#f8f8f8;border:1px solid #333;min-height:600px;}
+#main-panel .container .title{height:60px;background:#fff;}
 #footer{
 	height: 100px;
 }
 /*** sbox ***/
-#wrap{position:absolute;padding:3px;background:#000;}
+#wrap{position:absolute;padding:3px;background:#000;display:none;z-index:4;}
 #sb{position:relative;}
 #inbox input{width:300px;font-size:20px;padding:5px 0 3px 5px;}
 		
-#wrap{position:absolute;padding:5px;background:rgba(0, 0, 0, 0.6) none repeat scroll 0 0 !important;/*ÊµÏÖFF±³¾°Í¸Ã÷£¬ÎÄ×Ö²»Í¸Ã÷*/
-filter:Alpha(opacity=60);background:#333;/*ÊµÏÖIE±³¾°Í¸Ã÷*/}
+#wrap{position:absolute;padding:5px;background:rgba(0, 0, 0, 0.6) none repeat scroll 0 0 !important;/*Êµï¿½ï¿½FFï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö²ï¿½Í¸ï¿½ï¿½*/
+filter:Alpha(opacity=60);background:#333;/*Êµï¿½ï¿½IEï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½*/}
 #wrap #sb{position:relative;}
 #wrap #sb #one{position:relative;background:#fff;}
 #wrap #one div{float:left;}

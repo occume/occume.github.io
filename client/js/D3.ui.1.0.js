@@ -17,6 +17,7 @@
 		},
 		online: function(){
 			$("#d3_state img").attr("src", "/client/img/green.png");
+			$.scojs_message('This is an info message', $.scojs_message.TYPE_OK);
 		},
 		offline: function(){
 			$("#d3_state img").attr("src", "/client/img/red.png");

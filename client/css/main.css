@@ -206,10 +206,13 @@ div.next-step dl dd{
 	background: #ffffff;
 }
 #d3-main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;min-height:600px;background:#E7E7E7;padding:15px;}
-#d3-main-panel .d3-panel-1{border-right:2px solid #999;margin-right:15px;}
-#d3-main-panel .d3-panel-1 img{width:200px;height:200px;margin-left:10%;}
-#d3-main-panel .d3-panel-2{background:#fff;}
-#d3-main-panel .d3-panel-2 .tab-content .tab-pane{min-height:350px;}
+#d3-main-panel .d3-panel-1{border-right:2px solid #999;min-height:550px;}
+#d3-main-panel .d3-panel-1 img{width:200px;height:200px;margin-left:auto;margin-right:auto;}
+#d3-main-panel .d3-panel-2{border-right:2px solid #999;}
+#d3-main-panel .d3-panel-2 img{width:200px;height:200px;}
+#d3-main-panel .d3-panel-3{padding:0 0 0 15px;}
+#d3-main-panel .d3-panel-3 > div{background:#fff;}
+#d3-main-panel .d3-panel-3 .tab-content .tab-pane{min-height:350px;}
 #d3-main-panel .d3-chat-item{margin: 30px 0;}
 #d3-main-panel .d3-chat-item .d3-chat-item-title{
 	border-color: #EEEEEE;
@@ -224,8 +227,8 @@ div.next-step dl dd{
     padding: 10px;
 }
 
-#d3-main-panel .container{background:#f8f8f8;border:1px solid #333;min-height:600px;}
-#d3-main-panel .container .title{height:60px;background:#fff;}
+#d3-main-panel .container{background:#f8f8f8;min-height:600px;}
+#d3-main-panel .container .title{height:60px;}
 #footer{
 	height: 100px;
 }

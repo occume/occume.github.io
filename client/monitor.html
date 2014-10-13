@@ -150,13 +150,18 @@
 			</ul>
 		</div>
 		
-		<div id="main-panel">
-			<div class="container">
+		<div id="d3-main-panel">
+			<div class="">
+				<div class="row">
+				<div class="col-md-2 d3-panel-1">
+					<img src="img/tx2.jpg" alt="..." class="img-thumbnail">
+				</div>
+				<div class="col-md-9 d3-panel-2">
 				<div class="row title">
 					
-					<ul role="tablist" class="nav nav-tabs" id="myTab">
-<!-- 				      <li class=""><a data-toggle="tab" role="tab" href="#home">Home</a></li>
-				      <li class="active"><a data-toggle="tab" role="tab" href="#profile">Profile</a></li>
+					<ul role="tablist" class="nav nav-tabs default" id="myTab">
+				      <li class="active"><a data-toggle="tab" role="tab" href="#home">会话</a></li>
+<!-- 				      <li class="active"><a data-toggle="tab" role="tab" href="#profile">Profile</a></li>
 			      <li class="dropdown">
 				        <a data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop1" href="#">Dropdown <span class="caret"></span></a>
 				        <ul aria-labelledby="myTabDrop1" role="menu" class="dropdown-menu">
@@ -170,7 +175,10 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="tab-content" id="myTabContent">
-								      
+							<div id="home" class="tab-pane fade in">
+						        <div class="d3-chat-item">
+						        <span class="d3-chat-item-title">Default</span>Begin Conversation</div>
+						     </div>
 						</div>
 				        <div id="d3-chat-input">
 				             <textarea class="form-control" rows="3"></textarea>
@@ -185,12 +193,14 @@
 				           </div>
 				    </div>
 				</div>
+				</div>
+				</div>
 			</div>
 		</div>
 		
 		<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
 	      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-	      <div class="container-fluid container">
+	      <div class="container-fluid">
 	        <div class="navbar-header">
 	          <button data-target="#bs-example-navbar-collapse-7" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
 	            <span class="sr-only">Toggle navigation</span>
@@ -209,7 +219,7 @@
 	            <li id="d3_room"><a class="link normal nav_music_" href="#box13">房间</a></li>
 	            <li id="d3_frd"><a class="link normal nav_music_" href="#box15">好友</a></li>
 	            <li id="d3_dialog"><a href="#box16">会话</a></li>
-	            <li id="d3_msg_box"><a href="#" tabindex="0" class="btn" 
+	            <li id="d3_msg_box"><a href="#" tabindex="0" class="btn"
 	            		data-placement="top" data-container="body"
 	            		data-toggle="popover" title="消息" 
 	            		data-content="没有消息">消息<span class="label label-warning" id="d3_msg_count">0</span></a></li>

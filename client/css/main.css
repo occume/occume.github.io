@@ -205,9 +205,27 @@ div.next-step dl dd{
 .panel{
 	background: #ffffff;
 }
-#main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;display:none;min-height:600px;}
-#main-panel .container{background:#f8f8f8;border:1px solid #333;min-height:600px;}
-#main-panel .container .title{height:60px;background:#fff;}
+#d3-main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;min-height:600px;background:#E7E7E7;padding:15px;}
+#d3-main-panel .d3-panel-1{border-right:2px solid #999;margin-right:15px;}
+#d3-main-panel .d3-panel-1 img{width:200px;height:200px;margin-left:10%;}
+#d3-main-panel .d3-panel-2{background:#fff;}
+#d3-main-panel .d3-panel-2 .tab-content .tab-pane{min-height:350px;}
+#d3-main-panel .d3-chat-item{margin: 30px 0;}
+#d3-main-panel .d3-chat-item .d3-chat-item-title{
+	border-color: #EEEEEE;
+    border-image: none;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    border-left-style: solid;
+    border-left-width:5px;
+    border-left-color:#D9534F;
+    margin: 10px 10px 0 0;
+    padding: 10px;
+}
+
+#d3-main-panel .container{background:#f8f8f8;border:1px solid #333;min-height:600px;}
+#d3-main-panel .container .title{height:60px;background:#fff;}
 #footer{
 	height: 100px;
 }

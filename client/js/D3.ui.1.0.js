@@ -40,7 +40,7 @@
 			msgItem.attr("data-content", "一个消息");
 		},
 		onChat2One: function(rep){
-			console.log(rep);
+			
 			var navbar = $("#navbar");
 			navbar.append('<li id=""><a href="">'+ rep.name +'</a></li>');
 		},
@@ -55,7 +55,7 @@
 			});
 			
 			$("#d3_dialog").click(function(){
-				$("#main-panel").toggle();
+				$("#d3-main-panel").toggle();
 			});
 			
 			$("#d3_msg_box a").popover();
@@ -178,37 +178,61 @@
 			var box = $("#box13 .d3-chat-box");
 			var chatItem = $('<div class="alert alert-success" role="alert">'+ name + ": "+ info +'</div>')
 							.appendTo(box);
-			box.scrollTop(
-					chatItem.offset().top - box.offset().top + box.scrollTop()
-				);
+			box.scrollTop(chatItem.offset().top - box.offset().top + box.scrollTop());
 			$("#d3-chat-input textarea").focus();
 		},
 		onChat2One: function(rep){
-		
-			var tabs = $("#main-panel .nav-tabs"),
-				tabContents = $("#main-panel .tab-content"),
-				activeClass,
+			
+			var tabs = $("#d3-main-panel .nav-tabs"),
+				tabContents = $("#d3-main-panel .tab-content"),
+				activeClass = '',
+				myName = D3.session.user().name,
+				target,
 				html = "";
 		
 			if(!this.tabList){
-				this.tabList = [];
-				this.tabActive = !0;
+				this.tabList = {};
+				this.tabContentList = {};
+				this.tabActive = !1;
+				this.tabIndex = 1;
 			}
-			if(_.indexOf(this.tabList, rep.target) == -1){
-				this.tabList.push(rep.target);
+			
+			if(myName == rep.name){
+				target = rep.target;
+			}
+			else{
+				target = rep.name;
+			}
+			console.log(target);
+			var content = '<div class="d3-chat-item">' +
+	        '<span class="d3-chat-item-title">'+ rep.name +'</span>'+ rep.info +'</div>';
+			
+			if(!this.tabList[target]){
+//				this.tabList.push(target);
+				console.log(this.tabList);
 				if(!this.tabActive){
 					activeClass = "active";
+					this.tabActive = !0;
 				}
-				var id = _.indexOf(this.tabList, rep.target),
+				var id = this.tabIndex++,
 					tabId = "one-tab-" + id,
 					tabContentId = "on-tab-content-" + id;
-				html = '<li class="'+ activeClass +'" id="'+ tabId +'"><a data-toggle="tab" role="tab" href="#'+ tabContentId +'">'+ rep.target +'</a></li>';
+				
+				html = '<li class="'+ activeClass +'" id="'+ tabId +'"><a data-toggle="tab" role="tab" href="#'+ tabContentId +'">'+ target +'</a></li>';
+				html = $(html);
+				this.tabList[target] = html;
 				tabs.append(html);
-				html = '<div id="'+ tabContentId +'" class="tab-pane fade '+ activeClass +' in d3-chat-box">'+ rep.info +'</div>';
+				
+				html = '<div id="'+ tabContentId +'" class="tab-pane fade '+ activeClass +' in d3-chat-box">'+ content +'</div>';
+				html = $(html);
+				this.tabContentList[target] = html;
 				tabContents.append(html);
 			}
 			else{
 				
+				var tabContent = this.tabContentList[target];
+				console.log(tabContent);
+				tabContent.append(content);
 			}
 			
 		},

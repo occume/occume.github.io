@@ -223,16 +223,18 @@
 				html = $(html);
 				this.tabList[target] = html;
 				tabs.append(html);
+				html.siblings().removeClass("active");
+				html.addClass("active");
 				
 				html = '<div id="'+ tabContentId +'" class="tab-pane fade '+ activeClass +' in d3-chat-box">'+ content +'</div>';
 				html = $(html);
 				this.tabContentList[target] = html;
 				tabContents.append(html);
+				html.siblings().removeClass("active");
+				html.addClass("active");
 			}
 			else{
-				
 				var tabContent = this.tabContentList[target];
-				console.log(tabContent);
 				tabContent.append(content);
 			}
 			

@@ -10,7 +10,7 @@
 <link href="css/messenger.css" rel="stylesheet">
 <link href="css/messenger-theme-future.css" rel="stylesheet">
 <link href="css/sco.message.css" rel="stylesheet">
-<link href="css/scojs.css" rel="stylesheet">
+<!-- <link href="css/scojs.css" rel="stylesheet"> -->
 
 
 
@@ -148,7 +148,10 @@
 			<div class="">
 				<div class="row">
 				<div class="col-md-2 d3-panel-1">
-					<img src="img/tx2.jpg" alt="..." class="img-thumbnail">
+					<div class="container-fluid">
+						<img src="img/tx2.jpg" alt="..." class="img-thumbnail">
+						<h3 class="d3-user-name"></h3>
+					</div>
 				</div>
 				<div class="col-md-2 d3-panel-2">
 					<div class="panel-group d3-friend-list" id="accordion" role="tablist" aria-multiselectable="true">
@@ -202,26 +205,46 @@
 					  </div>
 					</div>
 					
+					<div class="d3-room-list" style="display:none;">
+						<ul class="list-group">
+					      <li class="list-group-item">
+					        <span class="badge">14</span>
+					        Cras justo odio
+					      </li>
+					      <li class="list-group-item">
+					        <span class="badge">2</span>
+					        Dapibus ac facilisis in
+					      </li>
+					      <li class="list-group-item">
+					        <span class="badge">1</span>
+					        Morbi leo risus
+					      </li>
+					    </ul>
+					</div>
+					
 				</div>
 				<div class="col-md-5 d3-panel-3">
 				<div class=".container-fluid">
 				<div class="row">
-					<div class="col-md-12">
-					<ul role="tablist" class="nav nav-tabs default" id="myTab">
-				      <li class="active"><a data-toggle="tab" role="tab" href="#home">会话</a></li>
-<!-- 				      <li class="active"><a data-toggle="tab" role="tab" href="#profile">Profile</a></li>
-			      <li class="dropdown">
-				        <a data-toggle="dropdown" class="dropdown-toggle" id="myTabDrop1" href="#">Dropdown <span class="caret"></span></a>
-				        <ul aria-labelledby="myTabDrop1" role="menu" class="dropdown-menu">
-				          <li><a data-toggle="tab" role="tab" tabindex="-1" href="#dropdown1">@fat</a></li>
-				          <li><a data-toggle="tab" role="tab" tabindex="-1" href="#dropdown2">@mdo</a></li>
-				        </ul>
-				      </li> -->	
-				    </ul>
-				    <div class="tab-content" id="myTabContent">
-							<div id="home" class="tab-pane fade active in">
+					<div class="col-md-12 d3-one-chat-panel">
+						<ul role="tablist" class="nav nav-tabs default">
+					      <li class="active"><a data-toggle="tab" role="tab" href="#begin-chat-one">会话</a></li>
+					    </ul>
+					    <div class="tab-content">
+							<div id="begin-chat-one" class="tab-pane fade active in">
 						        <div class="d3-chat-item">
 						        <span class="d3-chat-item-title">Default</span>Begin Conversation</div>
+						     </div>
+						</div>
+					</div>
+					<div class="col-md-12 d3-room-chat-panel" style="display:none;">
+						<ul role="tablist" class="nav nav-tabs default" id="myTab">
+					      <li class="active"><a data-toggle="tab" role="tab" href="#begin-chat-one">讨论组</a></li>
+					    </ul>
+					    <div class="tab-content">
+							<div id="begin-chat-one" class="tab-pane fade active in">
+						        <div class="d3-chat-item">
+						        <span class="d3-chat-item-title">Default</span>Begin Group Conversation</div>
 						     </div>
 						</div>
 					</div>
@@ -236,6 +259,35 @@
 				</div>
 				</div>
 			</div>
+		</div>
+		
+		<div id="d3-look-up-panel">
+			
+		    <ul role="tablist" class="nav nav-tabs">
+		      <li class="active"><a data-toggle="tab" role="tab" href="#d3-look-up-room">讨论组</a></li>
+		      <li><a data-toggle="tab" role="tab" href="#d3-look-up-one">用户</a></li>
+		    </ul>
+		    <div class="tab-content">
+		      <div id="d3-look-up-room" class="tab-pane fade in active">
+		      	<div class="well">
+		      		<div class="row">
+					  <div class="col-xs-2">
+					    <input type="text" class="form-control" placeholder="讨论组名称">
+					  </div>
+					</div>
+		      	</div>
+		      </div>
+		      <div id="d3-look-up-one" class="tab-pane fade">
+		      	<div class="well">
+		      		<div class="row">
+					  <div class="col-xs-2">
+					    <input type="text" class="form-control" placeholder="用户名称">
+					  </div>
+					</div>
+		      	</div>
+		      </div>
+		    </div>
+		 
 		</div>
 		
 		<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
@@ -256,8 +308,10 @@
 	            <li id="d3_music"><a href="#"></a></li>
 	            <li id="d3_state"><a href="javascript:;"><img src="/client/img/red.png"></a></li>
 	            <li id="d3_hall"><a class="link normal nav_music_" href="#box12">大厅</a></li>
-	            <li id="d3_room"><a class="link normal nav_music_" href="#box13">讨论组</a></li>
-	            <li id="d3_dialog"><a href="#box16">会话</a></li>
+	            <li id="d3_room_chat"><a class="link normal nav_music_" href="#box13">讨论组</a></li>
+	            <li id="d3_one_chat"><a href="#box16">会话</a></li>
+	            <li id="d3_show_main_panel"><a href="#box16">显示面板</a></li>
+	            <li id="d3_look_up"><a href="#box16">查找</a></li>
 	            <li id="d3_msg_box"><a href="#" tabindex="0" class="btn"
 	            		data-placement="top" data-container="body"
 	            		data-toggle="popover" title="消息" 
@@ -284,7 +338,7 @@
 	</div>
 	<div id="im"></div>
 	
-	<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/lib/sco.message.js"></script>
 

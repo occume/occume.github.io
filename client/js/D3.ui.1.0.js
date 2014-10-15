@@ -47,22 +47,85 @@
 		},
 		bind: function(){
 			
-			$("#d3_room").click(function(){
-				_main.showRoom();
+			$("#d3_room_chat").click(function(){
+//				_main.showRoom();
+				
+				panel2.change2RoomChat();
 			});
 			
 			$("#d3_hall").click(function(){
 				_main.showHall();
 			});
 			
-			$("#d3_dialog").click(function(){
+			$("#d3_one_chat").click(function(){
+				panel2.change2OneChat();
+			});
+			
+			$("#d3_show_main_panel").click(function(){
 				$("#d3-main-panel").toggle();
+			});
+			
+			$("#d3_look_up").click(function(){
+				$("#d3-look-up-panel").toggle();
 			});
 			
 			$("#d3_msg_box a").popover();
 		}
 	});
 	D3.UI.Statu = new Statu();
+	
+	var Panel1 = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			D3.event.on(D3.event.ON_LINE, this.online);
+		},
+		online: function(){
+			var user = D3.session.get(D3.Key.USER);
+			$(".d3-user-name").html(user.name);
+		},
+		offline: function(){
+			
+		},
+		bind: function(){
+			
+		}
+	});
+	var panel1 = D3.UI.Panel1 = new Panel1();
+	
+	var Panel2 = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			
+		},
+		change2OneChat: function(){
+			
+			$(".d3-friend-list").show();
+			$(".d3-one-chat-panel").show();
+			
+			$(".d3-room-list").hide();
+			$(".d3-room-chat-panel").hide();
+			
+		},
+		change2RoomChat: function(){
+			
+			$(".d3-friend-list").hide();
+			$(".d3-one-chat-panel").hide();
+			
+			$(".d3-room-list").show();
+			$(".d3-room-chat-panel").show();
+			
+		},
+		bind: function(){
+			
+		}
+	});
+	var panel2 = D3.UI.Panel2 = new Panel2();
 	
 	var Main = Class.create({
 		init: function(){
@@ -184,8 +247,8 @@
 		},
 		onChat2One: function(rep){
 			
-			var tabs = $("#d3-main-panel .nav-tabs"),
-				tabContents = $("#d3-main-panel .tab-content"),
+			var tabs = $(".d3-one-chat-panel .nav-tabs"),
+				tabContents = $(".d3-one-chat-panel .tab-content"),
 				activeClass = '',
 				myName = D3.session.user().name,
 				target,
@@ -204,7 +267,7 @@
 			else{
 				target = rep.name;
 			}
-			console.log(target);
+//			console.log(target);
 			var content = '<div class="d3-chat-item">' +
 	        '<span class="d3-chat-item-title">'+ rep.name +'</span>'+ rep.info +'</div>';
 			

@@ -132,7 +132,7 @@ div.next-step dl dd{
 .inner .compent dd ul{
 	overflow: hidden;
 }
-.d3-room-list li{
+.d3-room-list-bak li{
 	float:left;
 	width: 30%;
 	margin:10px;
@@ -218,7 +218,7 @@ div.next-step dl dd{
     margin: 10px 10px 0 0;
     padding: 10px;
 }
-
+#d3-look-up-panel{position:fixed;bottom:50px;left:0;right:0;z-index:4;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;}
 #footer{
 	height: 100px;
 }

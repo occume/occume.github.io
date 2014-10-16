@@ -2,7 +2,8 @@
 	
 	D3.Module = {
 		LOGIN: 1,
-		CHAT: 2
+		CHAT: 2,
+		USER: 3
 	};
 	D3.Module.Login = {
 		DFT: 1
@@ -16,8 +17,14 @@
 		CHAT: 5
 	};
 	
+	D3.Module.User = {
+		DFT: 1,
+		LOOKUP: 2,
+		ADD_FRIEND: 3
+	};
+	
 	D3.STATE = {
-		OK: "00"	
+		OK: "00"
 	};
 	
 	D3.Key = {

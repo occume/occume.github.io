@@ -272,7 +272,30 @@
 		      	<div class="well">
 		      		<div class="row">
 					  <div class="col-xs-2">
-					    <input type="text" class="form-control" placeholder="讨论组名称">
+					    <input type="text" class="form-control" placeholder="讨论组名称" id="d3-look-up-room-input">
+					    <div class="btn-group" style="margin-top:15px;">
+						  <button type="button" class="btn btn-default" id="d3-look-up-room-btn">查找</button>
+						  <button type="button" class="btn btn-default" id="d3-look-up-room-random">随机查找</button>
+						</div>
+					  </div>
+					  <div class="col-xs-10">
+					  	<div class="row">
+					  		<div class="col-sm-3">
+						  		<div class="panel panel-primary ">
+							      <div class="panel-heading">
+							        <h3 class="panel-title">Panel title</h3>
+							      </div>
+							      <div class="panel-body">
+							        <dl class="dl-horizontal">
+									  <dt>INFO</dt>
+									  <dd>...</dd>
+									</dl>
+
+							        <button type="button" class="btn btn-primary">加好友</button>
+							      </div>
+							    </div>
+						    </div>
+						</div>
 					  </div>
 					</div>
 		      	</div>
@@ -281,13 +304,55 @@
 		      	<div class="well">
 		      		<div class="row">
 					  <div class="col-xs-2">
-					    <input type="text" class="form-control" placeholder="用户名称">
+					    <input type="text" class="form-control" placeholder="用户名称" id="d3-look-up-one-input">
+					    <div class="btn-group" style="margin-top:15px;">
+						  <button type="button" class="btn btn-default" id="d3-look-up-one-btn">查找</button>
+						  <button type="button" class="btn btn-default" id="d3-look-up-one-random">随机查找</button>
+						</div>
+					  </div>
+					  <div class="col-xs-10">
+					  	<div class="row d3-result">
+					  		<div class="col-sm-3">
+						  		<div class="panel panel-primary ">
+							      <div class="panel-heading">
+							        <h3 class="panel-title">Panel title</h3>
+							      </div>
+							      <div class="panel-body">
+							        <dl class="dl-horizontal">
+									  <dt>INFO</dt>
+									  <dd>...</dd>
+									</dl>
+
+							        <button type="button" class="btn btn-primary">加好友</button>
+							      </div>
+							    </div>
+						    </div>
+						</div>
 					  </div>
 					</div>
 		      	</div>
 		      </div>
 		    </div>
 		 
+		</div>
+		
+		<div id="d3-message-panel">
+			<div class="row d3-result well">
+				<div class="col-sm-3">
+					<div class="panel panel-primary">
+				      <div class="panel-heading">
+				        <h3 class="panel-title">Panel title</h3>
+				      </div>
+					<div class="panel-body">
+						<dl class="dl-horizontal">
+							 <dt>INFO</dt>
+							<dd>...</dd>
+						</dl>
+						<button type="button" class="btn btn-primary">同意</button>
+						 </div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">

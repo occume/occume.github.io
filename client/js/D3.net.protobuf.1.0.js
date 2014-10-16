@@ -10,15 +10,11 @@
 		Login = Game.Login,
 		Chat = Game.Chat;
 	
-//	var chatMsg = new Chat("jd", "occume", "hello");
-//	var b = new Int8Array(chatMsg.toArrayBuffer().byteLength + 1);
-//	b[0] = 1;
-//	b.set(chatMsg.toArrayBuffer(), 1);
-//	console.log(b.byteLength);
 	var Parser = function(){
 		var parsers = {
 			"1": Login,
-			"2": Chat
+			"2": Chat,
+			"3": Chat
 		};
 		return {
 			getParser: function(module){
@@ -42,6 +38,13 @@
 	
 	D3.PB = {};
 	D3.PB.Packets = {
+		compsiteBuffer: function(module, cmd, buf){
+			var b = new dcodeIO.ByteBuffer(buf.toArrayBuffer().byteLength + 2);
+			b.writeByte(module);
+			b.writeByte(cmd);
+			b.append(buf.toArrayBuffer());
+			return b.buffer;
+		},
 		login: 	function(user){
 			var constructor = Parser.getParser(D3.Module.LOGIN);
 			var loginMsg = new constructor(user.name || "八千里路云和月", "123");
@@ -76,6 +79,22 @@
 			b.writeByte(D3.Module.Chat.CHAT);
 			b.append(msg.toArrayBuffer());
 			return b.buffer;
+		},
+		lookup: function(param){
+			var constructor = Parser.getParser(D3.Module.CHAT),
+				buf = new constructor(param.type, param.name, param.target, param.info),
+				module = D3.Module.USER,
+				cmd = D3.Module.User.LOOKUP;
+			
+			return this.compsiteBuffer(module, cmd, buf);
+		},
+		addFriend: function(param){
+			var constructor = Parser.getParser(D3.Module.CHAT),
+			buf = new constructor(param.type, param.name, param.target, param.info),
+			module = D3.Module.USER,
+			cmd = D3.Module.User.ADD_FRIEND;
+		
+			return this.compsiteBuffer(module, cmd, buf);
 		}
 	}; 
 	

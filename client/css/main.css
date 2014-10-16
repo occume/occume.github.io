@@ -219,6 +219,7 @@ div.next-step dl dd{
     padding: 10px;
 }
 #d3-look-up-panel{position:fixed;bottom:50px;left:0;right:0;z-index:4;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;}
+#d3-message-panel{position:fixed;bottom:50px;left:0;right:0;z-index:5;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;display:none;}
 #footer{
 	height: 100px;
 }

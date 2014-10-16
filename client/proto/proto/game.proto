@@ -18,4 +18,3 @@ package Game;
 		optional string state = 5;
 		optional string stateDesc = 6;
 	}
-

@@ -1,6 +1,24 @@
 (function (D3) {
 	"use strict";
 	
+	var Template = {
+			getTemplate: function(){
+				
+			},
+			fileInput: function(){
+				var html = '<div class="form-group">' +
+			    '<input type="file" name="file">' +
+			    '<p class="help-block"></p>' +
+			  '</div>';
+			  return html;
+			},
+			fillTemplate: function(temp, data){
+				return  temp.replace(/\\?\{([^{}]+)\}/g, function (match, name) {
+			    	return (data[name] === undefined) ? '' : data[name];
+			  	});
+			}
+		};
+	
 	D3.UI = {};
 	
 	var Statu = Class.create({
@@ -12,8 +30,8 @@
 		register: function(){
 			D3.event.on(D3.event.ON_LINE, this.online);
 			D3.event.on(D3.event.OFF_LINE, this.offline);
-			D3.event.on(D3.event.CHAT_2_ONE_REP, this.updateMessageBox.bind(this));
-			D3.event.on(D3.event.CHAT_2_ONE_REP, this.onChat2One.bind(this));
+			D3.event.on(D3.event.ADD_FRIEND_REP, this.updateMessageBox.bind(this));
+//			D3.event.on(D3.event.CHAT_2_ONE_REP, this.onChat2One.bind(this));
 		},
 		online: function(){
 			$("#d3_state img").attr("src", "/client/img/green.png");
@@ -23,22 +41,22 @@
 			$("#d3_state img").attr("src", "/client/img/red.png");
 		},
 		updateMessageBox: function(rep){
-			if(rep.name == D3.session.user().name){
-				return;
-			}
-			if(rep.type == "ROOM" && _main.inScreen == _main.SCREEN.ROOM){
-				return;
-			}
-			if(rep.type == "ONE" && _main.inScreen == _main.SCREEN.DIALOG){
-				return;
-			}
+//			if(rep.name == D3.session.user().name){
+//				return;
+//			}
+//			if(rep.type == "ROOM" && _main.inScreen == _main.SCREEN.ROOM){
+//				return;
+//			}
+//			if(rep.type == "ONE" && _main.inScreen == _main.SCREEN.DIALOG){
+//				return;
+//			}
 			var msgBox = this.messageBox,
 				msgCount = msgBox.find("#d3_msg_count"),
 				count = parseInt(msgCount.html());
 			msgCount.html(count + 1);
 			
 			var msgItem = msgBox.find("a");
-			msgItem.attr("data-content", "一个消息");
+//			msgItem.attr("data-content", "一个消息");
 		},
 		onChat2One: function(rep){
 			
@@ -66,10 +84,13 @@
 			});
 			
 			$("#d3_look_up").click(function(){
-				$("#d3-look-up-panel").toggle();
+				lookupPanel.toggle();
 			});
 			
-			$("#d3_msg_box a").popover();
+			$("#d3_msg_box").click(function(){
+				_messagePanel.toggle();
+				$("#d3_msg_count").html(0);
+			});
 		}
 	});
 	D3.UI.Statu = new Statu();
@@ -126,6 +147,129 @@
 		}
 	});
 	var panel2 = D3.UI.Panel2 = new Panel2();
+	
+	var LookupPanel = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			D3.event.on(D3.event.LOOK_UP_USER_REP, this.onLookupUser.bind(this));
+		},
+		toggle: function(){
+			$("#d3-look-up-panel").toggle();
+		},
+		onLookupUser: function(rep){
+			var template = '<div class="col-sm-3"><div class="panel panel-primary ">' +
+			      '<div class="panel-heading">' +
+			        '<h3 class="panel-title">{name}</h3>' +
+			      '</div>' +
+			      '<div class="panel-body">' +
+			        '<dl class="dl-horizontal">' +
+					  '<dt>Email:</dt>' +
+					  '<dd>{email}</dd>' +
+					'</dl>' +
+			        '<button type="button" class="btn btn-primary" data-name="{name}">加好友</button>' +
+			      '</div>' +
+			    '</div></div>';
+			var list = JSON.parse(rep.info),
+				html = "";
+			if(list.length){
+				$(list).each(function(idx, itm){
+					html += Template.fillTemplate(template, itm);
+				});
+				$("#d3-look-up-one .d3-result").html(html);
+			}
+			else{
+				
+			}
+		},
+		bind: function(){
+			/**
+			 *  type:
+			 *  	1 by name
+			 *  	2 random
+			 */
+			$("#d3-look-up-one-btn").click(function(){
+				var param = {
+					type: "1",
+					name: $("#d3-look-up-one-input").val(),
+					target: "",
+					info: ""
+				};
+				lookup(param);
+			});
+			$("#d3-look-up-one-random").click(function(){
+				var param = {
+					type: "2",
+					name: "",
+					target: "",
+					info: ""
+				};
+				lookup(param);
+			});
+			
+			function lookup(param){
+				D3.event(D3.event.LOOK_UP_USER_ASK, null, param);
+			}
+			
+			$(document).on("click", "#d3-look-up-one .panel .btn", function(){
+				var 
+					user = D3.session.get(D3.Key.USER),
+					param = {
+					type: "1",
+					name: user.name,
+					target: $(this).attr("data-name"),
+					info: ""
+				};
+				D3.event(D3.event.ADD_FRIEND_ASK, null, param);
+			});
+			
+		}
+	});
+	var lookupPanel = new LookupPanel();
+	
+	var MessagePanel = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			D3.event.on(D3.event.ADD_FRIEND_REP, this.onAddFriend.bind(this));
+		},
+		toggle: function(){
+			$("#d3-message-panel").toggle();
+		},
+		onAddFriend: function(rep){
+			var template = '<div class="col-sm-3"><div class="panel panel-primary ">' +
+			      '<div class="panel-heading">' +
+			        '<h3 class="panel-title">好友请求</h3>' +
+			      '</div>' +
+			      '<div class="panel-body">' +
+			        '<p>{name}请求加你为好友!</p>' +
+			        '<button type="button" class="btn btn-primary" data-name="{name}">同意</button>' +
+			      '</div>' +
+			    '</div></div>';
+			
+			var html = Template.fillTemplate(template, rep);
+			
+			$("#d3-message-panel .d3-result").append(html);
+		},
+		bind: function(){
+			$(document).on("click", "#d3-message-panel .panel .btn", function(){
+				var 
+					user = D3.session.get(D3.Key.USER),
+					param = {
+					type: "2",
+					name: user.name,
+					target: $(this).attr("data-name"),
+					info: ""
+				};
+				D3.event(D3.event.ADD_FRIEND_ASK, null, param);
+			});
+		}
+	});
+	var _messagePanel = new MessagePanel();
 	
 	var Main = Class.create({
 		init: function(){

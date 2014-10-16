@@ -218,6 +218,14 @@
     eve.CHAT_2_ONE_ASK = "chat2OneAsk";
     eve.CHAT_2_ONE_REP = "chat2OneRep";
     
+    eve.LOOK_UP_USER_ASK = "lookupOneAsk";
+    eve.LOOK_UP_USER_REP = "lookupOneRep";
+    eve.LOOK_UP_ROOM_ASK = "lookupRoomAsk";
+    eve.LOOK_UP_ROOM_REP = "lookupRoomRep";
+    
+    eve.ADD_FRIEND_ASK = "addFriendAsk";
+    eve.ADD_FRIEND_REP = "addFriendRep";
+    
     D3.event = eve;
     
 })(window.D3 = window.D3 || {});

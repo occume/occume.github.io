@@ -122,7 +122,10 @@
 			this.bind();
 		},
 		register: function(){
-			
+			D3.event.on(D3.event.FRIEND_LIST_REP, this.onFriendList.bind(this));
+		},
+		onFriendList: function(rep){
+			console.log(rep);
 		},
 		change2OneChat: function(){
 			

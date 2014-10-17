@@ -20,7 +20,8 @@
 	D3.Module.User = {
 		DFT: 1,
 		LOOKUP: 2,
-		ADD_FRIEND: 3
+		MESSAGE: 3,
+		FRIEND_LIST: 4
 	};
 	
 	D3.STATE = {

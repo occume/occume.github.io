@@ -11,12 +11,20 @@
 				D3.event(D3.event.LOOK_UP_USER_REP, null, rep);
 			});
 			
-			D3.addProcessor(D3.Module.USER, D3.Module.User.ADD_FRIEND,
+			D3.addProcessor(D3.Module.USER, D3.Module.User.MESSAGE,
 			function(rep){
 				/**
 				 * 好友请求
 				 */
 				D3.event(D3.event.ADD_FRIEND_REP, null, rep);
+			});
+			
+			D3.addProcessor(D3.Module.USER, D3.Module.User.FRIEND_LIST,
+			function(rep){
+				/**
+				 * 好友请求
+				 */
+				D3.event(D3.event.FRIEND_LIST_REP, null, rep);
 			});
 			
 			this.register();

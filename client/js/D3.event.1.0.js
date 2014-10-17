@@ -226,6 +226,9 @@
     eve.ADD_FRIEND_ASK = "addFriendAsk";
     eve.ADD_FRIEND_REP = "addFriendRep";
     
+    eve.FRIEND_LIST_ASK = "friendListAsk";
+    eve.FRIEND_LIST_REP = "friendListRep";
+    
     D3.event = eve;
     
 })(window.D3 = window.D3 || {});

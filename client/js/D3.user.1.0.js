@@ -22,7 +22,7 @@
 			D3.addProcessor(D3.Module.USER, D3.Module.User.FRIEND_LIST,
 			function(rep){
 				/**
-				 * 好友请求
+				 * 好友列表
 				 */
 				D3.event(D3.event.FRIEND_LIST_REP, null, rep);
 			});

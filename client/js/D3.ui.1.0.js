@@ -94,7 +94,9 @@
 		}
 	});
 	D3.UI.Statu = new Statu();
-	
+	/**
+	 * 用户信息列表
+	 */
 	var Panel1 = Class.create({
 		init: function(){
 			this.register();
@@ -115,7 +117,9 @@
 		}
 	});
 	var panel1 = D3.UI.Panel1 = new Panel1();
-	
+	/**
+	 * 用户关系列表
+	 */
 	var Panel2 = Class.create({
 		init: function(){
 			this.register();
@@ -125,11 +129,20 @@
 			D3.event.on(D3.event.FRIEND_LIST_REP, this.onFriendList.bind(this));
 		},
 		onFriendList: function(rep){
-			console.log(rep);
+//			console.log(rep);
+			var relation = $(".d3-relation"),
+				friendList = relation.find("#collapseOne .list-group"),
+				html = "",
+				list = JSON.parse(rep.info);
+			$(list).each(function(idx, itm){
+				html += '<a href="#" class="list-group-item active">'+ itm.name +'</a>';
+			});
+			
+			friendList.html(html);
 		},
 		change2OneChat: function(){
 			
-			$(".d3-friend-list").show();
+			$(".d3-relation").show();
 			$(".d3-one-chat-panel").show();
 			
 			$(".d3-room-list").hide();
@@ -138,7 +151,7 @@
 		},
 		change2RoomChat: function(){
 			
-			$(".d3-friend-list").hide();
+			$(".d3-relation").hide();
 			$(".d3-one-chat-panel").hide();
 			
 			$(".d3-room-list").show();
@@ -146,11 +159,38 @@
 			
 		},
 		bind: function(){
-			
+			$(document).delegate("#d3-relation-friend .list-group a", "click", function(){
+				
+			});
 		}
 	});
 	var panel2 = D3.UI.Panel2 = new Panel2();
-	
+	/**
+	 * 对话界面
+	 */
+	var Panel3 = Class.create({
+		init: function(){
+			this.register();
+			this.bind();
+		},
+		register: function(){
+			D3.event.on(D3.event.ON_LINE, this.online);
+		},
+		online: function(){
+			var user = D3.session.get(D3.Key.USER);
+			$(".d3-user-name").html(user.name);
+		},
+		offline: function(){
+			
+		},
+		bind: function(){
+			
+		}
+	});
+	var panel3 = D3.UI.Panel3 = new Panel3();
+	/**
+	 * 查找层
+	 */
 	var LookupPanel = Class.create({
 		init: function(){
 			this.register();

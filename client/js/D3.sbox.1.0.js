@@ -179,14 +179,15 @@
 //				showIM(pkt);
 //			});
 			console.log(msg);
-			var user = D3.session.get(D3.Key.USER),
-				ask = D3[D3.PROTOCOL].Packets.chat({type: "ONE", name: user.name, target: name, info: msg});
-			D3.session.send(ask);
+//			var user = D3.session.get(D3.Key.USER),
+//				ask = D3[D3.PROTOCOL].Packets.chat({type: "ONE", name: user.name, target: name, info: msg});
+//			D3.session.send(ask);
+			D3.event(D3.event.CHAT_2_ONE_ASK, null, {target: name, info: msg});
 		};
 		/**
 		 * 异常提示
 		 */
-		parse.excep = function(msg) {
+		parse.excep = function(msg){
 
 		};
 		SBOX.parse = parse;

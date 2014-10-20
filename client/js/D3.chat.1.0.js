@@ -43,6 +43,7 @@
 			D3.event.on(D3.event.ON_LOGIN, this.askRoomList);
 			D3.event.on(D3.event.ENTER_ROOM_ASK, this.askEnterRoom);
 			D3.event.on(D3.event.CHAT_2_ROOM_ASK, this.askChat2Room);
+			D3.event.on(D3.event.CHAT_2_ONE_ASK, this.askChat2One);
 		},
 		askRoomList: function(){
 			
@@ -80,6 +81,11 @@
 				for(var i = 0; i < 1000; i++)
 					D3.session.send(rst);
 			}, 100);
+		},
+		askChat2One: function(msg){
+			var user = D3.session.get(D3.Key.USER),
+			ask = D3[D3.PROTOCOL].Packets.chat({type: "ONE", name: user.name, target: msg.target, info: msg.info});
+			D3.session.send(ask);
 		}
 	};
 	

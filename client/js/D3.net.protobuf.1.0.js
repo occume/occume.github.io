@@ -92,7 +92,7 @@
 			var constructor = Parser.getParser(D3.Module.CHAT),
 			buf = new constructor(param.type, param.name, param.target, param.info),
 			module = D3.Module.USER,
-			cmd = D3.Module.User.ADD_FRIEND;
+			cmd = D3.Module.User.MESSAGE;
 		
 			return this.compsiteBuffer(module, cmd, buf);
 		}

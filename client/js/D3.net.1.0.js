@@ -21,7 +21,8 @@
 		DFT: 1,
 		LOOKUP: 2,
 		MESSAGE: 3,
-		FRIEND_LIST: 4
+		FRIEND_LIST: 4,
+		MSG_LIST: 5
 	};
 	
 	D3.STATE = {

@@ -81,14 +81,20 @@
 			
 			$("#d3_show_main_panel").click(function(){
 				$("#d3-main-panel").toggle();
+				_messagePanel.hide();
+				lookupPanel.hide();
 			});
 			
 			$("#d3_look_up").click(function(){
 				lookupPanel.toggle();
+				_messagePanel.hide();
+				$("#d3-main-panel").hide();
 			});
 			
 			$("#d3_msg_box").click(function(){
 				_messagePanel.toggle();
+				lookupPanel.hide();
+				$("#d3-main-panel").hide();
 				$("#d3_msg_count").html(0);
 			});
 		}
@@ -131,13 +137,13 @@
 		onFriendList: function(rep){
 //			console.log(rep);
 			var relation = $(".d3-relation"),
-				friendList = relation.find("#collapseOne .list-group"),
+				friendList = relation.find("#d3-relation-friend .list-group"),
 				html = "",
 				list = JSON.parse(rep.info);
 			$(list).each(function(idx, itm){
 				html += '<a href="#" class="list-group-item active">'+ itm.name +'</a>';
 			});
-			
+//			console.log(html);
 			friendList.html(html);
 		},
 		change2OneChat: function(){
@@ -202,8 +208,18 @@
 		toggle: function(){
 			$("#d3-look-up-panel").toggle();
 		},
+		show: function(){
+			$("#d3-look-up-panel").show();
+		},
+		hide: function(){
+			$("#d3-look-up-panel").hide();
+		},
 		onLookupUser: function(rep){
-			var template = '<div class="col-sm-3"><div class="panel panel-primary ">' +
+			var btn0 = '<button type="button" class="btn-primary">你自己</button>',
+				btn1 = '<button type="button" class="btn-primary">已是好友</button>',
+				btn2 = '<button type="button" class="btn btn-primary" data-name="{name}">加好友</button>',
+				tmPrefix = 
+				'<div class="col-sm-3"><div class="panel panel-primary ">' +
 			      '<div class="panel-heading">' +
 			        '<h3 class="panel-title">{name}</h3>' +
 			      '</div>' +
@@ -211,15 +227,25 @@
 			        '<dl class="dl-horizontal">' +
 					  '<dt>Email:</dt>' +
 					  '<dd>{email}</dd>' +
-					'</dl>' +
-			        '<button type="button" class="btn btn-primary" data-name="{name}">加好友</button>' +
-			      '</div>' +
-			    '</div></div>';
+					'</dl>',
+			    tmpSuffix = '</div></div></div>',
+			    tmp0 = tmPrefix + btn0 + tmpSuffix,
+			    tmp1 = tmPrefix + btn1 + tmpSuffix,
+			    tmp2 = tmPrefix + btn2 + tmpSuffix;
 			var list = JSON.parse(rep.info),
 				html = "";
 			if(list.length){
 				$(list).each(function(idx, itm){
-					html += Template.fillTemplate(template, itm);
+					
+					if(itm.relation < 0){
+						html += Template.fillTemplate(tmp0, itm);
+					}
+					else if(itm.relation == 1){
+						html += Template.fillTemplate(tmp1, itm);
+					}
+					else{
+						html += Template.fillTemplate(tmp2, itm);
+					}
 				});
 				$("#d3-look-up-one .d3-result").html(html);
 			}
@@ -260,11 +286,12 @@
 				var 
 					user = D3.session.get(D3.Key.USER),
 					param = {
-					type: "1",
-					name: user.name,
-					target: $(this).attr("data-name"),
-					info: ""
-				};
+						type: "1",
+						name: user.name,
+						target: $(this).attr("data-name"),
+						info: ""
+					};
+//				console.log(param);
 				D3.event(D3.event.ADD_FRIEND_ASK, null, param);
 			});
 			
@@ -279,12 +306,34 @@
 		},
 		register: function(){
 			D3.event.on(D3.event.ADD_FRIEND_REP, this.onAddFriend.bind(this));
+			D3.event.on(D3.event.AGREE_FRIEND_REP, this.onAgreeFriend.bind(this));
+			D3.event.on(D3.event.MSG_LIST_REP, this.onMsgList.bind(this));
 		},
 		toggle: function(){
 			$("#d3-message-panel").toggle();
 		},
+		show: function(){
+			$("#d3-message-panel").show();
+		},
+		hide: function(){
+			$("#d3-message-panel").hide();
+		},
+		/**
+		 * message type
+		 * 1 加好友请求
+		 * 2 同意好友
+		 * 3 拒绝加好友
+		 */
+		onMsgList: function(rep){
+			console.log(rep);
+		},
 		onAddFriend: function(rep){
-			var template = '<div class="col-sm-3"><div class="panel panel-primary ">' +
+			if(rep.state == 202){
+				$.scojs_message('请求已发送，正在等待对方回应', $.scojs_message.TYPE_OK);
+				return;
+			}
+			var template = 
+				'<div class="col-sm-3"><div class="panel panel-primary ">' +
 			      '<div class="panel-heading">' +
 			        '<h3 class="panel-title">好友请求</h3>' +
 			      '</div>' +
@@ -298,17 +347,33 @@
 			
 			$("#d3-message-panel .d3-result").append(html);
 		},
+		onAgreeFriend: function(rep){
+			var template = 
+				'<div class="col-sm-3"><div class="panel panel-primary ">' +
+			      '<div class="panel-heading">' +
+			        '<h3 class="panel-title">好友请求</h3>' +
+			      '</div>' +
+			      '<div class="panel-body">' +
+			        '<p>{name}同意加你为好友!</p>' +
+			        '<button type="button" class="btn btn-primary" data-name="{name}">确定</button>' +
+			      '</div>' +
+			    '</div></div>';
+			
+			var html = Template.fillTemplate(template, rep);
+			
+			$("#d3-message-panel .d3-result").append(html);
+		},
 		bind: function(){
 			$(document).on("click", "#d3-message-panel .panel .btn", function(){
 				var 
 					user = D3.session.get(D3.Key.USER),
 					param = {
-					type: "2",
-					name: user.name,
-					target: $(this).attr("data-name"),
-					info: ""
-				};
-				D3.event(D3.event.ADD_FRIEND_ASK, null, param);
+						type: "2",
+						name: user.name,
+						target: $(this).attr("data-name"),
+						info: ""
+					};
+				D3.event(D3.event.AGREE_FRIEND_ASK, null, param);
 			});
 		}
 	});

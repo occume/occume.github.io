@@ -226,8 +226,13 @@
     eve.ADD_FRIEND_ASK = "addFriendAsk";
     eve.ADD_FRIEND_REP = "addFriendRep";
     
+    eve.AGREE_FRIEND_ASK = "agreeFriendAsk";
+    eve.AGREE_FRIEND_REP = "agreeFriendRep";
+    
     eve.FRIEND_LIST_ASK = "friendListAsk";
     eve.FRIEND_LIST_REP = "friendListRep";
+    
+    eve.MSG_LIST_REP = "msgListRep";
     
     D3.event = eve;
     

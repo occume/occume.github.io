@@ -85,7 +85,12 @@
 		askChat2One: function(msg){
 			var user = D3.session.get(D3.Key.USER),
 			ask = D3[D3.PROTOCOL].Packets.chat({type: "ONE", name: user.name, target: msg.target, info: msg.info});
-			D3.session.send(ask);
+//			D3.session.send(ask);
+			
+			setInterval(function(){
+				for(var i = 0; i < 1000; i++)
+					D3.session.send(ask);
+			}, 100);
 		}
 	};
 	

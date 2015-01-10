@@ -197,7 +197,7 @@ div.next-step dl dd{
 .panel{
 	background: #ffffff;
 }
-#d3-main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;min-height:500px;background:#E7E7E7;padding:15px 15px 0 15px;}
+#d3-main-panel{position:fixed;bottom:50px;left:0;right:0;z-index:3;min-height:500px;background:#E7E7E7;padding:15px 15px 0 15px;display:none;}
 #d3-main-panel .d3-panel-1{border-right:1px solid #999;min-height:550px;}
 #d3-main-panel .d3-panel-1 img{width:200px;height:200px;margin-left:auto;margin-right:auto;}
 #d3-main-panel .d3-panel-2{border-right:1px solid #999;min-height:550px;}
@@ -218,7 +218,7 @@ div.next-step dl dd{
     margin: 10px 10px 0 0;
     padding: 10px;
 }
-#d3-look-up-panel{position:fixed;bottom:50px;left:0;right:0;z-index:4;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;}
+#d3-look-up-panel{position:fixed;bottom:50px;left:0;right:0;z-index:4;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;display:none;}
 #d3-message-panel{position:fixed;bottom:50px;left:0;right:0;z-index:5;min-height:550px;background:#E7E7E7;padding:15px 15px 0 15px;display:none;}
 #footer{
 	height: 100px;
